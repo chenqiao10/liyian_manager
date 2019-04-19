@@ -8,7 +8,7 @@ package com.yijie.manager.client.model;
 public class Admin {
 	
 	//主键id
-	private int id;
+	private Integer id;
 	
 	//管理员uuid
 	private String uuid;
@@ -22,11 +22,11 @@ public class Admin {
 	//账号名称
 	private String name;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -73,7 +73,7 @@ public class Admin {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admin(int id, String uuid, String num, String password, String name) {
+	public Admin(Integer id, String uuid, String num, String password, String name) {
 		super();
 		this.id = id;
 		this.uuid = uuid;
@@ -81,5 +81,5 @@ public class Admin {
 		this.password = password;
 		this.name = name;
 	}
-	
+
 }

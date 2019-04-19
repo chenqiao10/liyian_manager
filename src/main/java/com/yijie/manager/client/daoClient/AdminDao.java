@@ -20,8 +20,8 @@ public interface AdminDao {
 	@RequestMapping("/yilianData/admin/adminTable")
 	public List<Admin> adminTable(Admin admin);
 	
-	//管理账户信息查询
-	@RequestMapping("/yilianData/admin/adminTable")
+	//管理账户登录
+	@RequestMapping("/yilianData/admin/adminLogin")
 	public Admin adminLogin(Admin admin);
 	
 	//管理账户信息删除

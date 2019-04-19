@@ -13,7 +13,7 @@ import com.yijie.manager.client.model.Adcolumn;
 import com.yijie.manager.client.service.AdcolumnService;
 
 @RestController
-@RequestMapping("/Adcolumn")
+@RequestMapping("/admin")
 public class AdcolumnController {
 	
 	@Autowired
@@ -25,8 +25,8 @@ public class AdcolumnController {
 	 * @param adcolumn
 	 * @return
 	 */
-	@RequestMapping("/adcolumnTable")
-	public Map<String, Object> adcolumnTable(@RequestBody Adcolumn adcolumn){
+	@RequestMapping("/adcolumnSelect")
+	public Map<String, Object> adcolumnSelect(@RequestBody Adcolumn adcolumn){
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			List<Adcolumn> list = adcolumnService.adcolumnTable(adcolumn);
@@ -75,8 +75,8 @@ public class AdcolumnController {
 	 * @param adcolumn
 	 * @return
 	 */
-	@RequestMapping("/adcolumnAdd")
-	public Map<String, Object> adcolumnAdd(@RequestBody Adcolumn adcolumn){
+	@RequestMapping("/adcolumnInsert")
+	public Map<String, Object> adcolumnInsert(@RequestBody Adcolumn adcolumn){
 		Map<String, Object> map = new HashMap<String, Object>();
 		Integer code = adcolumnService.adcolumnInsert(adcolumn);
 		map.put("code", code);

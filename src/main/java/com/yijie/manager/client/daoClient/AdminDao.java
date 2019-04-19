@@ -17,7 +17,7 @@ import com.yijie.manager.client.model.Admin;
 public interface AdminDao {
 	
 	//管理账户信息查询
-	@RequestMapping("/yilianData/admin/adminTable")
+	@RequestMapping("/yilianData/admin/adminSelect")
 	public List<Admin> adminTable(Admin admin);
 	
 	//管理账户登录

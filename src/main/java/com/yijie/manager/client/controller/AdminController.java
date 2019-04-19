@@ -58,8 +58,8 @@ public class AdminController {
 	 * @param admin
 	 * @return
 	 */
-	@RequestMapping("/adminAdd")
-	public Map<String, Object> adminAdd(@RequestBody Admin admin){
+	@RequestMapping("/adminInsert")
+	public Map<String, Object> adminInsert(@RequestBody Admin admin){
 		Map<String, Object> map = new HashMap<String, Object>();
 		Integer code = adminService.adminInsert(admin);
 		map.put("code", code);
@@ -100,7 +100,7 @@ public class AdminController {
 	 * @param admin
 	 * @return
 	 */
-	@RequestMapping("/adminTable")
+	@RequestMapping("/adminSelect")
 	public Map<String, Object> adminTable(Admin admin){
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {

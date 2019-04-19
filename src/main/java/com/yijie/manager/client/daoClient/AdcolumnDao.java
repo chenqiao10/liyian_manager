@@ -17,19 +17,19 @@ import com.yijie.manager.client.model.Adcolumn;
 public interface AdcolumnDao {
 	
 	//管理账户信息查询
-	@RequestMapping("/yilianData/adcolumn/adcolumnTable")
+	@RequestMapping("/yilianData/admin/adcolumnSelect")
 	public List<Adcolumn> adcolumnTable(Adcolumn adcolumn);
 	
 	//管理账户信息删除
-	@RequestMapping("/yilianData/adcolumn/adcolumnDelete")
+	@RequestMapping("/yilianData/admin/adcolumnDelete")
 	public Integer adcolumnDelete(Adcolumn adcolumn);
 	
 	//管理账户信息修改
-	@RequestMapping("/yilianData/adcolumn/adcolumnUpdate")
+	@RequestMapping("/yilianData/admin/adcolumnUpdate")
 	public Integer adcolumnUpdate(Adcolumn adcolumn);
 	
 	//添加管理账户信息
-	@RequestMapping("/yilianData/adcolumn/adcolumnInsert")
+	@RequestMapping("/yilianData/admin/adcolumnInsert")
 	public Integer adcolumnInsert(Adcolumn adcolumn);
 
 }

@@ -13,23 +13,24 @@ import com.yijie.manager.client.model.Adcolumn;
  * @author sunzhu
  *
  */
-@FeignClient("ylmanager.zuul.api")
+//yijie.zuul.api
+@FeignClient("yilian.data.client")
 public interface AdcolumnDao {
 	
 	//管理账户信息查询
-	@RequestMapping("/yilianData/admin/adcolumnSelect")
-	public List<Adcolumn> adcolumnTable(Adcolumn adcolumn);
+	@RequestMapping("/admin/adcolumnSelect")
+	public List<Adcolumn> adcolumnSelect(Adcolumn adcolumn);
 	
 	//管理账户信息删除
-	@RequestMapping("/yilianData/admin/adcolumnDelete")
+	@RequestMapping("/admin/adcolumnDelete")
 	public Integer adcolumnDelete(Adcolumn adcolumn);
 	
 	//管理账户信息修改
-	@RequestMapping("/yilianData/admin/adcolumnUpdate")
+	@RequestMapping("/admin/adcolumnUpdate")
 	public Integer adcolumnUpdate(Adcolumn adcolumn);
 	
 	//添加管理账户信息
-	@RequestMapping("/yilianData/admin/adcolumnInsert")
+	@RequestMapping("/admin/adcolumnInsert")
 	public Integer adcolumnInsert(Adcolumn adcolumn);
 
 }

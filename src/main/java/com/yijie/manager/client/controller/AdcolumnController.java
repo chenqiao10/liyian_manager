@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yijie.manager.client.model.Adcolumn;
 import com.yijie.manager.client.service.AdcolumnService;
+import com.yijie.manager.client.utils.Uuid;
 
 @RestController
 @RequestMapping("/admin")
@@ -29,7 +30,7 @@ public class AdcolumnController {
 	public Map<String, Object> adcolumnSelect(@RequestBody Adcolumn adcolumn){
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			List<Adcolumn> list = adcolumnService.adcolumnTable(adcolumn);
+			List<Adcolumn> list = adcolumnService.adcolumnSelect(adcolumn);
 			map.put("data", list);
 			map.put("code", 1);
 		} catch (Exception e) {
@@ -78,6 +79,7 @@ public class AdcolumnController {
 	@RequestMapping("/adcolumnInsert")
 	public Map<String, Object> adcolumnInsert(@RequestBody Adcolumn adcolumn){
 		Map<String, Object> map = new HashMap<String, Object>();
+		adcolumn.setUuid(Uuid.getUuid());
 		Integer code = adcolumnService.adcolumnInsert(adcolumn);
 		map.put("code", code);
 		return map;

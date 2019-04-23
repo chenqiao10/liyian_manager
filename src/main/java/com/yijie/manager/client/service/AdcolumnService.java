@@ -13,7 +13,7 @@ import com.yijie.manager.client.model.Adcolumn;
 public interface AdcolumnService {
 	
 	//管理员信息查询
-	public List<Adcolumn> adcolumnTable(Adcolumn adcolumn);
+	public List<Adcolumn> adcolumnSelect(Adcolumn adcolumn);
 	
 	//管理员信息删除
 	public Integer adcolumnDelete(Adcolumn adcolumn);

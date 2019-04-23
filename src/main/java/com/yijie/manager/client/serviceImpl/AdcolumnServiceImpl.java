@@ -22,9 +22,9 @@ public class AdcolumnServiceImpl implements AdcolumnService{
 	private AdcolumnDao adcolumnDao;
 
 	@Override
-	public List<Adcolumn> adcolumnTable(Adcolumn adcolumn) {
+	public List<Adcolumn> adcolumnSelect(Adcolumn adcolumn) {
 		// TODO Auto-generated method stub
-		return adcolumnDao.adcolumnTable(adcolumn);
+		return adcolumnDao.adcolumnSelect(adcolumn);
 	}
 
 	@Override

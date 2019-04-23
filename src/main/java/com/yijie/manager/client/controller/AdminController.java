@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yijie.manager.client.model.Admin;
 import com.yijie.manager.client.service.AdminService;
+import com.yijie.manager.client.utils.Uuid;
 
 /**
  * 管理员账户模块
@@ -61,6 +62,7 @@ public class AdminController {
 	@RequestMapping("/adminInsert")
 	public Map<String, Object> adminInsert(@RequestBody Admin admin){
 		Map<String, Object> map = new HashMap<String, Object>();
+		admin.setUuid(Uuid.getUuid());
 		Integer code = adminService.adminInsert(admin);
 		map.put("code", code);
 		return map;
@@ -73,7 +75,7 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("/adminUpdate")
-	public Map<String, Object> adminUpdate(Admin admin){
+	public Map<String, Object> adminUpdate(@RequestBody Admin admin){
 		Map<String, Object> map = new HashMap<String, Object>();
 		Integer code = adminService.adminUpdate(admin);
 		map.put("code", code);
@@ -87,7 +89,7 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("/adminDelete")
-	public Map<String, Object> adminDelete(Admin admin){
+	public Map<String, Object> adminDelete(@RequestBody Admin admin){
 		Map<String, Object> map = new HashMap<String, Object>();
 		Integer code = adminService.adminDelete(admin);
 		map.put("code", code);
@@ -101,7 +103,7 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("/adminSelect")
-	public Map<String, Object> adminTable(Admin admin){
+	public Map<String, Object> adminTable(@RequestBody Admin admin){
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			List<Admin> list = adminService.adminTable(admin);

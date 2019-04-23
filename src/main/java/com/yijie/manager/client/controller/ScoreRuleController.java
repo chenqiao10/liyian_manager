@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yijie.manager.client.model.ScoreRule;
 import com.yijie.manager.client.service.ScoreRuleService;
+import com.yijie.manager.client.utils.Uuid;
 
 
 @RestController
@@ -43,6 +44,7 @@ public class ScoreRuleController {
 	public Map<String, Object> scoreRuleAdd(@RequestBody ScoreRule ScoreRule) {
 		
 		try {
+			ScoreRule.setUuid(Uuid.getUuid());
 			Integer code = ScoreRuleService.scoreRuleAdd(ScoreRule);
 
 			result.put("code", code);

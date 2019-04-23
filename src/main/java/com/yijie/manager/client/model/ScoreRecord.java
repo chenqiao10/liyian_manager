@@ -14,7 +14,7 @@ public class ScoreRecord {
 	private int id;
 	
 	//系统生成的UUID
-	private int uuid;
+	private String uuid;
 	
 	//领取时间
 	private Date date;
@@ -39,11 +39,11 @@ public class ScoreRecord {
 		this.id = id;
 	}
 
-	public int getUuid() {
+	public String getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(int uuid) {
+	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
 
@@ -87,18 +87,18 @@ public class ScoreRecord {
 		this.begin = begin;
 	}
 
-	public ScoreRecord() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public String toString() {
 		return "ScoreRecord [id=" + id + ", uuid=" + uuid + ", date=" + date + ", type=" + type + ", user_uuid="
 				+ user_uuid + ", score=" + score + ", begin=" + begin + "]";
 	}
 
-	public ScoreRecord(int id, int uuid, Date date, String type, String user_uuid, String score, Integer begin) {
+	public ScoreRecord() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ScoreRecord(int id, String uuid, Date date, String type, String user_uuid, String score, Integer begin) {
 		super();
 		this.id = id;
 		this.uuid = uuid;

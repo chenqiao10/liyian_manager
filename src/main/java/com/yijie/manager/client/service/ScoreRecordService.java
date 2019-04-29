@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.yijie.manager.client.model.ScoreRecord;
 
-
-
 /**
  * 
  * 积分记录

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yijie.manager.client.model.Admin;
+import com.yijie.manager.client.model.User;
 import com.yijie.manager.client.service.AdminService;
 import com.yijie.manager.client.utils.Uuid;
 
@@ -34,23 +35,31 @@ public class AdminController {
 	private AdminService adminService;
 	
 	/**
-	 * 管理员登录
-	 * 
-	 * @param admin
+	 * @描述 用户登录
+	 * @param user
 	 * @return
 	 */
 	@RequestMapping("/adminLogin")
-	public Map<String, Object> adminLogin(@RequestBody Admin admin){
-		Map<String, Object> map = new HashMap<String, Object>();
-		Admin a = adminService.adminLogin(admin);
-		if(a == null) {
-			map.put("code", 0);
-			map.put("msg", "账号不存在或密码错误！");
+	public Map<String,Object> adminLogin(@RequestBody Admin admin){
+		Map<String,Object> result = new HashMap<String,Object>();
+		String msg = null;
+		if(admin.getNum()!=null&&admin.getPassword()!=null) {//根据电话号登录
+			Admin a = adminService.adminLogin(admin);
+			if(a == null){
+				result.put("code", 0);
+				msg = "账户不存在或密码错误！";
+			}else{
+				result.put("code", 1);
+				msg = "登录成功！";
+			}
+			result.put("admin", a);
+			result.put("msg", msg);
+			return result;
 		}else {
-			map.put("code", 1);
-			map.put("msg", "登陆成功！");
+			result.put("code", 0);
+			msg = "账户不存在或密码错误！";
+			return result;
 		}
-		return map;
 	}
 	
 	/**

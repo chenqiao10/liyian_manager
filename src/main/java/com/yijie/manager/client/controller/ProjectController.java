@@ -1,5 +1,6 @@
 package com.yijie.manager.client.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yijie.manager.client.model.ProjectDesign;
 import com.yijie.manager.client.model.Projects;
+import com.yijie.manager.client.model.User;
 import com.yijie.manager.client.service.ProjectService;
+import com.yijie.manager.client.service.UserHandleService;
 import com.yijie.manager.client.utils.Uuid;
+
 
 
 /**
@@ -27,6 +31,8 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private UserHandleService UserHandleService;
 	
 	/**
 	 * @描述 创建项目
@@ -36,8 +42,11 @@ public class ProjectController {
 	@RequestMapping("/projectBuild")
 	@ResponseBody
 	public Map<String,Object> projectBuild(@RequestBody Projects projects){
-		Map<String,Object> result = new HashMap<String, Object>();
+		System.out.println(projects);
 		projects.setUuid(Uuid.getUuid());
+		projects.setAudit(2);//2审核中
+		projects.setDate(new Date());
+		Map<String,Object> result = new HashMap<String, Object>();
 		Integer code = projectService.projectBuild(projects);
 		result.put("code", code);
 		return result;
@@ -75,18 +84,26 @@ public class ProjectController {
 	@RequestMapping("/projectMessage")
 	@ResponseBody
 	public Map<String,Object> projectMessage(@RequestBody Projects projects){
+		System.out.println(projects);
 		Map<String,Object> result = new HashMap<String, Object>();
-		try {
-			Projects project = projectService.projectMessage(projects);
-			result.put("projectMessage", project);
-			result.put("code", 1);
-			return result;
-		} catch (Exception e) {
-			e.printStackTrace();
-			result.put("code", 0);
-			result.put("msg", "系统出错");
-			return result;
+		if(projects.getId()!=null||projects.getUuid()!=null) {
+			try {
+				Projects project = projectService.projectMessage(projects);
+				User user =new User();
+				user.setUuid(project.getUser_uuid());
+				String name = UserHandleService.userLogin(user).getName();
+				result.put("projectMessage", project);
+				result.put("name", name);
+				result.put("code", 1);
+				return result;
+			} catch (Exception e) {
+				e.printStackTrace();
+				result.put("code", 0);
+				result.put("msg", "系统出错");
+				return result;
+			}
 		}
+		return result;
 	}
 	
 	
@@ -98,11 +115,12 @@ public class ProjectController {
 	@RequestMapping("/projectUpdate")
 	@ResponseBody
 	public Map<String,Object> projectUpdate(@RequestBody Projects projects){
+		System.out.println(projects);
 		Map<String,Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = projectService.projectUpdate(projects);
-			result.put("projectMessage", code);
-			result.put("code", 1);
+//			result.put("projectMessage", code);
+			result.put("code", code);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,6 +139,7 @@ public class ProjectController {
 	@RequestMapping("/projectDelete")
 	@ResponseBody
 	public Map<String,Object> projectDelete(@RequestBody Projects projects){
+		System.out.println(projects);
 		Map<String,Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = projectService.projectDelete(projects);
@@ -143,6 +162,7 @@ public class ProjectController {
 	@RequestMapping("/projectDesignAdd")
 	@ResponseBody
 	public Map<String,Object> projectDesignAdd(@RequestBody List<ProjectDesign> projectDesigns){
+		System.out.println(projectDesigns);
 		Map<String,Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = projectService.projectDesignAdd(projectDesigns);
@@ -165,6 +185,7 @@ public class ProjectController {
 	@RequestMapping("/projectDesignUodate")
 	@ResponseBody
 	public Map<String,Object> projectDesignUodate(@RequestBody List<ProjectDesign> projectDesigns){
+		System.out.println(projectDesigns);
 		Map<String,Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = projectService.projectDesignUpdate(projectDesigns);

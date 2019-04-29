@@ -8,7 +8,7 @@ import com.yijie.manager.client.model.User;
 /**
  * 用户数据接口
  * @author chenqiao
- *
+ * yijie.zuul.api
  */
 @FeignClient("yijie.zuul.api")
 public interface UserDao {

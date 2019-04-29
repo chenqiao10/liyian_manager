@@ -13,27 +13,27 @@ import com.yijie.manager.client.model.Admin;
  * @author sunzhu
  *
  */
-@FeignClient("test.data.client")
+@FeignClient("yijie.zuul.api")
 public interface AdminDao {
 	
 	//管理账户信息查询
-	@RequestMapping("/admin/adminSelect")
+	@RequestMapping("/yilianData/admin/adminSelect")
 	public List<Admin> adminTable(Admin admin);
 	
 	//管理账户登录
-	@RequestMapping("/admin/adminLogin")
+	@RequestMapping("/yilianData/admin/adminLogin")
 	public Admin adminLogin(Admin admin);
 	
 	//管理账户信息删除
-	@RequestMapping("/admin/adminDelete")
+	@RequestMapping("/yilianData/admin/adminDelete")
 	public Integer adminDelete(Admin admin);
 	
 	//管理账户信息修改
-	@RequestMapping("/admin/adminUpdate")
+	@RequestMapping("/yilianData/admin/adminUpdate")
 	public Integer adminUpdate(Admin admin);
 	
 	//添加管理账户信息
-	@RequestMapping("/admin/adminInsert")
+	@RequestMapping("/yilianData/admin/adminInsert")
 	public Integer adminInsert(Admin admin);
 
 }

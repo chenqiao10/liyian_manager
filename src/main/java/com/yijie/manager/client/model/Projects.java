@@ -1,6 +1,6 @@
 package com.yijie.manager.client.model;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,7 +41,7 @@ public class Projects {
 	private String phone;
 
 	// 联系微信
-	private String OICQ;
+	private String oicq;
 
 	// 项目类型
 	private String type;
@@ -145,12 +145,12 @@ public class Projects {
 		this.phone = phone;
 	}
 
-	public String getOICQ() {
-		return OICQ;
+	public String getOicq() {
+		return oicq;
 	}
 
-	public void setOICQ(String oICQ) {
-		this.OICQ = oICQ;
+	public void setOicq(String oicq) {
+		this.oicq = oicq;
 	}
 
 	public String getType() {
@@ -177,60 +177,6 @@ public class Projects {
 		this.audit = audit;
 	}
 
-	public List<ProjectDesign> getDesigns() {
-		return designs;
-	}
-
-	public void setDesigns(List<ProjectDesign> designs) {
-		this.designs = designs;
-	}
-
-	public Integer getBegin() {
-		return begin;
-	}
-
-	public void setBegin(Integer begin) {
-		this.begin =begin;
-	}
-
-	public Projects() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "Projects [id=" + id + ", uuid=" + uuid + ", user_uuid=" + user_uuid + ", title=" + title + ", message="
-				+ message + ", area=" + area + ", days=" + days + ", min_budget=" + min_budget + ", max_budget="
-				+ max_budget + ", phone=" + phone + ", OICQ=" + OICQ + ", type=" + type + ", price=" + price
-				+ ", audit=" + audit + ",click_count=" + click_count + ",cha_count="+cha_count+", date=" + date + ",designs=" + designs + ", begin=" + begin + "]";
-	}
-
-	public Projects(Integer id, String uuid, String user_uuid, String title, String message, String area, Integer days,
-			Double min_budget, Double max_budget, String phone, String oICQ, String type, Integer price, Integer audit,Integer click_count,Integer cha_count,Date date,
-			List<ProjectDesign> designs, Integer begin) {
-		super();
-		this.id = id;
-		this.uuid = uuid;
-		this.user_uuid = user_uuid;
-		this.title = title;
-		this.message = message;
-		this.area = area;
-		this.days = days;
-		this.min_budget = min_budget;
-		this.max_budget = max_budget;
-		this.phone = phone;
-		this.OICQ = oICQ;
-		this.type = type;
-		this.price = price;
-		this.audit = audit;
-		this.click_count = click_count;
-		this.cha_count = cha_count;
-		this.date = date;
-		this.designs = designs;
-		this.begin = begin;
-	}
-
 	public Integer getClick_count() {
 		return click_count;
 	}
@@ -253,6 +199,61 @@ public class Projects {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public List<ProjectDesign> getDesigns() {
+		return designs;
+	}
+
+	public void setDesigns(List<ProjectDesign> designs) {
+		this.designs = designs;
+	}
+
+	public Integer getBegin() {
+		return begin;
+	}
+
+	public void setBegin(Integer begin) {
+		this.begin = begin;
+	}
+
+	@Override
+	public String toString() {
+		return "Projects [id=" + id + ", uuid=" + uuid + ", user_uuid=" + user_uuid + ", title=" + title + ", message="
+				+ message + ", area=" + area + ", days=" + days + ", min_budget=" + min_budget + ", max_budget="
+				+ max_budget + ", phone=" + phone + ", oicq=" + oicq + ", type=" + type + ", price=" + price
+				+ ", audit=" + audit + ", click_count=" + click_count + ", cha_count=" + cha_count + ", date=" + date
+				+ ", designs=" + designs + ", begin=" + begin + "]";
+	}
+
+	public Projects() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Projects(Integer id, String uuid, String user_uuid, String title, String message, String area, Integer days,
+			Double min_budget, Double max_budget, String phone, String oicq, String type, Integer price, Integer audit,
+			Integer click_count, Integer cha_count, Date date, List<ProjectDesign> designs, Integer begin) {
+		super();
+		this.id = id;
+		this.uuid = uuid;
+		this.user_uuid = user_uuid;
+		this.title = title;
+		this.message = message;
+		this.area = area;
+		this.days = days;
+		this.min_budget = min_budget;
+		this.max_budget = max_budget;
+		this.phone = phone;
+		this.oicq = oicq;
+		this.type = type;
+		this.price = price;
+		this.audit = audit;
+		this.click_count = click_count;
+		this.cha_count = cha_count;
+		this.date = date;
+		this.designs = designs;
+		this.begin = begin;
 	}
 
 }

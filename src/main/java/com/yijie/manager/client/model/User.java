@@ -17,7 +17,7 @@ public class User {
 	private String openid;
 	
 	//账户QQ登录对应UID
-	private String QQuid;
+	private String qquid;
 	
 	//账户电话号码（登录账号）
 	private String num;
@@ -37,20 +37,15 @@ public class User {
 	//企业级别账户对应营业执照
 	private String license;
 	
-	//是否通过审核(1.通过，0.未通过)
+	//是否通过审核(1.通过，2.审核中那个0.未通过)
 	private Integer audit;
-	
+	//注册渠道(直接注册0账户升级1)
+	private Integer registtype;
 	// 分页数据（初始条数）
 	private Integer begin;
 	
-	//注册渠道(直接注册0账户升级1)
-	private Integer registtype;
-	
 	//邀请码
-	private String inviteUUid;
-	
-	//角色权限
-	private String userrule;
+	private String  inviteUUid;
 
 	public Integer getId() {
 		return id;
@@ -76,12 +71,12 @@ public class User {
 		this.openid = openid;
 	}
 
-	public String getQQuid() {
-		return QQuid;
+	public String getQquid() {
+		return qquid;
 	}
 
-	public void setQQuid(String qQuid) {
-		QQuid = qQuid;
+	public void setQquid(String qquid) {
+		this.qquid = qquid;
 	}
 
 	public String getNum() {
@@ -140,20 +135,20 @@ public class User {
 		this.audit = audit;
 	}
 
-	public Integer getBegin() {
-		return begin;
-	}
-
-	public void setBegin(Integer begin) {
-		this.begin = begin;
-	}
-
 	public Integer getRegisttype() {
 		return registtype;
 	}
 
 	public void setRegisttype(Integer registtype) {
 		this.registtype = registtype;
+	}
+
+	public Integer getBegin() {
+		return begin;
+	}
+
+	public void setBegin(Integer begin) {
+		this.begin = begin;
 	}
 
 	public String getInviteUUid() {
@@ -166,9 +161,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", uuid=" + uuid + ", openid=" + openid + ", QQuid=" + QQuid + ", num=" + num
+		return "User [id=" + id + ", uuid=" + uuid + ", openid=" + openid + ", qquid=" + qquid + ", num=" + num
 				+ ", password=" + password + ", name=" + name + ", balance=" + balance + ", level=" + level
-				+ ", license=" + license + ", audit=" + audit + ", begin=" + begin + ", registtype=" + registtype
+				+ ", license=" + license + ", audit=" + audit + ", registtype=" + registtype + ", begin=" + begin
 				+ ", inviteUUid=" + inviteUUid + "]";
 	}
 
@@ -177,14 +172,14 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(Integer id, String uuid, String openid, String qQuid, String num, String password, String name,
-			Integer balance, Integer level, String license, Integer audit, Integer begin, Integer registtype,
+	public User(Integer id, String uuid, String openid, String qquid, String num, String password, String name,
+			Integer balance, Integer level, String license, Integer audit, Integer registtype, Integer begin,
 			String inviteUUid) {
 		super();
 		this.id = id;
 		this.uuid = uuid;
 		this.openid = openid;
-		QQuid = qQuid;
+		this.qquid = qquid;
 		this.num = num;
 		this.password = password;
 		this.name = name;
@@ -192,9 +187,10 @@ public class User {
 		this.level = level;
 		this.license = license;
 		this.audit = audit;
-		this.begin = begin;
 		this.registtype = registtype;
+		this.begin = begin;
 		this.inviteUUid = inviteUUid;
 	}
-
+	
+	
 }

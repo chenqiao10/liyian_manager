@@ -21,6 +21,7 @@ public class SafeLog {
 	
 	//分页起始数据
 	private Integer begin;
+	
 
 	public Integer getId() {
 		return id;

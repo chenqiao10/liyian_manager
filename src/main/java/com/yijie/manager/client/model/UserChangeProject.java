@@ -18,16 +18,25 @@ public class UserChangeProject {
 	
 	// 项目名称
 	private String title;
+	
+	//操作人名字
+	private String handle_name;
+	
+	//操作人id
+	private Integer handle_id;
 
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public String getPro_uuid() {
 		return pro_uuid;
 	}
+
 	public void setPro_uuid(String pro_uuid) {
 		this.pro_uuid = pro_uuid;
 	}
@@ -48,23 +57,44 @@ public class UserChangeProject {
 		this.title = title;
 	}
 
-	public UserChangeProject() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getHandle_name() {
+		return handle_name;
+	}
+
+	public void setHandle_name(String handle_name) {
+		this.handle_name = handle_name;
+	}
+
+	public Integer getHandle_id() {
+		return handle_id;
+	}
+
+	public void setHandle_id(Integer handle_id) {
+		this.handle_id = handle_id;
 	}
 
 	@Override
 	public String toString() {
 		return "UserChangeProject [id=" + id + ", pro_uuid=" + pro_uuid + ", user_uuid=" + user_uuid + ", title="
-				+ title + "]";
+				+ title + ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
 	}
 
-	public UserChangeProject(Integer id, String pro_uuid, String user_uuid, String title) {
+	public UserChangeProject() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public UserChangeProject(Integer id, String pro_uuid, String user_uuid, String title, String handle_name,
+			Integer handle_id) {
 		super();
 		this.id = id;
 		this.pro_uuid = pro_uuid;
 		this.user_uuid = user_uuid;
 		this.title = title;
+		this.handle_name = handle_name;
+		this.handle_id = handle_id;
 	}
+
+	
 
 }

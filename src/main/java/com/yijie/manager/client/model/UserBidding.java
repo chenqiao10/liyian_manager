@@ -37,6 +37,12 @@ public class UserBidding {
 	// 分页数据（初始条数）
 	private Integer begin;
 
+	//操作人名字
+	private String handle_name;
+	
+	//操作人id
+	private Integer handle_id;
+
 	public Integer getId() {
 		return id;
 	}
@@ -114,14 +120,31 @@ public class UserBidding {
 	}
 
 	public void setBegin(Integer begin) {
-		this.begin = ((begin-1)*20)+1;
+		this.begin = begin;
+	}
+
+	public String getHandle_name() {
+		return handle_name;
+	}
+
+	public void setHandle_name(String handle_name) {
+		this.handle_name = handle_name;
+	}
+
+	public Integer getHandle_id() {
+		return handle_id;
+	}
+
+	public void setHandle_id(Integer handle_id) {
+		this.handle_id = handle_id;
 	}
 
 	@Override
 	public String toString() {
 		return "UserBidding [id=" + id + ", user_uuid=" + user_uuid + ", user_phone=" + user_phone + ", tender_uuid="
 				+ tender_uuid + ", title=" + title + ", type=" + type + ", price=" + price + ", license=" + license
-				+ ", audit=" + audit + ", begin=" + begin + "]";
+				+ ", audit=" + audit + ", begin=" + begin + ", handle_name=" + handle_name + ", handle_id=" + handle_id
+				+ "]";
 	}
 
 	public UserBidding() {
@@ -130,7 +153,7 @@ public class UserBidding {
 	}
 
 	public UserBidding(Integer id, String user_uuid, String user_phone, String tender_uuid, String title, String type,
-			Double price, String license, Integer audit, Integer begin) {
+			Double price, String license, Integer audit, Integer begin, String handle_name, Integer handle_id) {
 		super();
 		this.id = id;
 		this.user_uuid = user_uuid;
@@ -141,7 +164,10 @@ public class UserBidding {
 		this.price = price;
 		this.license = license;
 		this.audit = audit;
-		this.begin = ((begin-1)*20)+1;
+		this.begin = begin;
+		this.handle_name = handle_name;
+		this.handle_id = handle_id;
 	}
+	
 	
 }

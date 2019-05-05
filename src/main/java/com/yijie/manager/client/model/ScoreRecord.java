@@ -30,6 +30,12 @@ public class ScoreRecord {
 	
 	// 分页数据（初始条数）
 	private Integer begin;
+	
+	//操作人名字
+	private String handle_name;
+	
+	//操作人id
+	private Integer handle_id;
 
 	public int getId() {
 		return id;
@@ -87,10 +93,27 @@ public class ScoreRecord {
 		this.begin = begin;
 	}
 
+	public String getHandle_name() {
+		return handle_name;
+	}
+
+	public void setHandle_name(String handle_name) {
+		this.handle_name = handle_name;
+	}
+
+	public Integer getHandle_id() {
+		return handle_id;
+	}
+
+	public void setHandle_id(Integer handle_id) {
+		this.handle_id = handle_id;
+	}
+
 	@Override
 	public String toString() {
 		return "ScoreRecord [id=" + id + ", uuid=" + uuid + ", date=" + date + ", type=" + type + ", user_uuid="
-				+ user_uuid + ", score=" + score + ", begin=" + begin + "]";
+				+ user_uuid + ", score=" + score + ", begin=" + begin + ", handle_name=" + handle_name + ", handle_id="
+				+ handle_id + "]";
 	}
 
 	public ScoreRecord() {
@@ -98,7 +121,8 @@ public class ScoreRecord {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ScoreRecord(int id, String uuid, Date date, String type, String user_uuid, String score, Integer begin) {
+	public ScoreRecord(int id, String uuid, Date date, String type, String user_uuid, String score, Integer begin,
+			String handle_name, Integer handle_id) {
 		super();
 		this.id = id;
 		this.uuid = uuid;
@@ -107,7 +131,10 @@ public class ScoreRecord {
 		this.user_uuid = user_uuid;
 		this.score = score;
 		this.begin = begin;
+		this.handle_name = handle_name;
+		this.handle_id = handle_id;
 	}
 
+	
 	
 }

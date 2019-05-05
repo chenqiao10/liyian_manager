@@ -21,6 +21,12 @@ public class Admin {
 	
 	//账号名称
 	private String name;
+	
+	//操作人名字
+	private String handle_name;
+	
+	//操作人id
+	private Integer handle_id;
 
 	public Integer getId() {
 		return id;
@@ -62,10 +68,26 @@ public class Admin {
 		this.name = name;
 	}
 
+	public String getHandle_name() {
+		return handle_name;
+	}
+
+	public void setHandle_name(String handle_name) {
+		this.handle_name = handle_name;
+	}
+
+	public Integer getHandle_id() {
+		return handle_id;
+	}
+
+	public void setHandle_id(Integer handle_id) {
+		this.handle_id = handle_id;
+	}
+
 	@Override
 	public String toString() {
 		return "Admin [id=" + id + ", uuid=" + uuid + ", num=" + num + ", password=" + password + ", name=" + name
-				+ "]";
+				+ ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
 	}
 
 	public Admin() {
@@ -73,13 +95,17 @@ public class Admin {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admin(Integer id, String uuid, String num, String password, String name) {
+	public Admin(Integer id, String uuid, String num, String password, String name, String handle_name,
+			Integer handle_id) {
 		super();
 		this.id = id;
 		this.uuid = uuid;
 		this.num = num;
 		this.password = password;
 		this.name = name;
+		this.handle_name = handle_name;
+		this.handle_id = handle_id;
 	}
 
+	
 }

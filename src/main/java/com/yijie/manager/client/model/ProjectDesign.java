@@ -19,6 +19,12 @@ public class ProjectDesign {
 	// 附件路径
 	private String design;
 
+	//操作人名字
+	private String handle_name;
+	
+	//操作人id
+	private Integer handle_id;
+
 	public Integer getId() {
 		return id;
 	}
@@ -27,11 +33,11 @@ public class ProjectDesign {
 		this.id = id;
 	}
 
-	public String getproject_uuid() {
+	public String getProject_uuid() {
 		return project_uuid;
 	}
 
-	public void setproject_uuid(String project_uuid) {
+	public void setProject_uuid(String project_uuid) {
 		this.project_uuid = project_uuid;
 	}
 
@@ -51,10 +57,26 @@ public class ProjectDesign {
 		this.design = design;
 	}
 
+	public String getHandle_name() {
+		return handle_name;
+	}
+
+	public void setHandle_name(String handle_name) {
+		this.handle_name = handle_name;
+	}
+
+	public Integer getHandle_id() {
+		return handle_id;
+	}
+
+	public void setHandle_id(Integer handle_id) {
+		this.handle_id = handle_id;
+	}
+
 	@Override
 	public String toString() {
 		return "ProjectDesign [id=" + id + ", project_uuid=" + project_uuid + ", filename=" + filename + ", design="
-				+ design + "]";
+				+ design + ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
 	}
 
 	public ProjectDesign() {
@@ -62,12 +84,16 @@ public class ProjectDesign {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ProjectDesign(Integer id, String project_uuid, String filename, String design) {
+	public ProjectDesign(Integer id, String project_uuid, String filename, String design, String handle_name,
+			Integer handle_id) {
 		super();
 		this.id = id;
 		this.project_uuid = project_uuid;
 		this.filename = filename;
 		this.design = design;
+		this.handle_name = handle_name;
+		this.handle_id = handle_id;
 	}
-
+	
+	
 }

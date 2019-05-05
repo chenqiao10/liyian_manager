@@ -3,11 +3,13 @@ package com.yijie.manager.client.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.yijie.manager.client.daoClient.SafeLogDao;
 import com.yijie.manager.client.model.SafeLog;
 import com.yijie.manager.client.service.SafeLogService;
 
+@Service
 public class SafeLogServiceImpl implements SafeLogService{
 	
 	@Autowired

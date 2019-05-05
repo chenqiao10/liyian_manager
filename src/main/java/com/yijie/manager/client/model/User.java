@@ -47,6 +47,12 @@ public class User {
 	//邀请码
 	private String  inviteUUid;
 
+	//操作人名字
+	private String handle_name;
+	
+	//操作人id
+	private Integer handle_id;
+
 	public Integer getId() {
 		return id;
 	}
@@ -159,12 +165,28 @@ public class User {
 		this.inviteUUid = inviteUUid;
 	}
 
+	public String getHandle_name() {
+		return handle_name;
+	}
+
+	public void setHandle_name(String handle_name) {
+		this.handle_name = handle_name;
+	}
+
+	public Integer getHandle_id() {
+		return handle_id;
+	}
+
+	public void setHandle_id(Integer handle_id) {
+		this.handle_id = handle_id;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", uuid=" + uuid + ", openid=" + openid + ", qquid=" + qquid + ", num=" + num
 				+ ", password=" + password + ", name=" + name + ", balance=" + balance + ", level=" + level
 				+ ", license=" + license + ", audit=" + audit + ", registtype=" + registtype + ", begin=" + begin
-				+ ", inviteUUid=" + inviteUUid + "]";
+				+ ", inviteUUid=" + inviteUUid + ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
 	}
 
 	public User() {
@@ -174,7 +196,7 @@ public class User {
 
 	public User(Integer id, String uuid, String openid, String qquid, String num, String password, String name,
 			Integer balance, Integer level, String license, Integer audit, Integer registtype, Integer begin,
-			String inviteUUid) {
+			String inviteUUid, String handle_name, Integer handle_id) {
 		super();
 		this.id = id;
 		this.uuid = uuid;
@@ -190,6 +212,8 @@ public class User {
 		this.registtype = registtype;
 		this.begin = begin;
 		this.inviteUUid = inviteUUid;
+		this.handle_name = handle_name;
+		this.handle_id = handle_id;
 	}
 	
 	

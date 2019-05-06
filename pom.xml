@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.yijie</groupId>
-	<artifactId>manager.client</artifactId>
+	<artifactId>yilian.manager.client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>manager.client</name>
+	<name>yilian.manager.client</name>
 	<description>cloud</description>
 
 	<properties>

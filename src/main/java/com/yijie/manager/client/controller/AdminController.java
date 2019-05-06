@@ -6,20 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-/**
- * 管理账户模块
- * 
- * @author sunzhu
- *
- */
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yijie.manager.client.model.Admin;
 import com.yijie.manager.client.model.SafeLog;
-import com.yijie.manager.client.model.User;
 import com.yijie.manager.client.service.AdminService;
 import com.yijie.manager.client.service.SafeLogService;
 import com.yijie.manager.client.utils.Uuid;

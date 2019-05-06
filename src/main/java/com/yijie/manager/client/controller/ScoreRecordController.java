@@ -14,7 +14,6 @@ import com.yijie.manager.client.model.SafeLog;
 import com.yijie.manager.client.model.ScoreRecord;
 import com.yijie.manager.client.service.SafeLogService;
 import com.yijie.manager.client.service.ScoreRecordService;
-import com.yijie.manager.client.utils.Uuid;
 
 /**
  * 积分记录
@@ -64,7 +63,6 @@ public class ScoreRecordController {
 	public Map<String, Object> ScoreRecordInsert(@RequestBody ScoreRecord scoreRecord) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			scoreRecord.setUuid(Uuid.getUuid());
 			Integer code = scoreRecordService.scoreRecordAdd(scoreRecord);
 			String msg = "";
 			if (code == 0) {

@@ -22,6 +22,9 @@ public class Admin {
 	//账号名称
 	private String name;
 	
+	//状态0停用 1正常
+	private Integer status;
+	
 	//操作人名字
 	private String handle_name;
 	
@@ -68,6 +71,14 @@ public class Admin {
 		this.name = name;
 	}
 
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	public String getHandle_name() {
 		return handle_name;
 	}
@@ -87,7 +98,7 @@ public class Admin {
 	@Override
 	public String toString() {
 		return "Admin [id=" + id + ", uuid=" + uuid + ", num=" + num + ", password=" + password + ", name=" + name
-				+ ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
+				+ ", status=" + status + ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
 	}
 
 	public Admin() {
@@ -95,7 +106,7 @@ public class Admin {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admin(Integer id, String uuid, String num, String password, String name, String handle_name,
+	public Admin(Integer id, String uuid, String num, String password, String name, Integer status, String handle_name,
 			Integer handle_id) {
 		super();
 		this.id = id;
@@ -103,6 +114,7 @@ public class Admin {
 		this.num = num;
 		this.password = password;
 		this.name = name;
+		this.status = status;
 		this.handle_name = handle_name;
 		this.handle_id = handle_id;
 	}

@@ -68,8 +68,10 @@ public class AdminController {
 	 */
 	@RequestMapping("/adminInsert")
 	public Map<String, Object> adminInsert(@RequestBody Admin admin) {
+		System.out.println(admin);
 		Map<String, Object> map = new HashMap<String, Object>();
 		admin.setUuid(Uuid.getUuid());
+		admin.setStatus(1);//1正常
 		Integer code = adminService.adminInsert(admin);
 		String msg = "";
 		if (code == 0) {

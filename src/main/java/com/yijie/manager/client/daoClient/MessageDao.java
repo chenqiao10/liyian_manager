@@ -2,10 +2,18 @@ package com.yijie.manager.client.daoClient;
 
 import java.util.List;
 
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yijie.manager.client.model.Message;
 
+/**
+ * @ 推送消息接口
+ * 
+ * @author sunzhu
+ *
+ */
+@FeignClient("yijie.zuul.api")
 public interface MessageDao {
 	// 推送消息查询
 	@RequestMapping("/yilianData/admin/messageSelect")

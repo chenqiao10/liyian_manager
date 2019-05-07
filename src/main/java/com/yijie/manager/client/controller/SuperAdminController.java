@@ -22,6 +22,7 @@ import com.yijie.manager.client.model.SafeLog;
 import com.yijie.manager.client.model.SuperAdmin;
 import com.yijie.manager.client.service.SafeLogService;
 import com.yijie.manager.client.service.SuperAdminService;
+import com.yijie.manager.client.utils.Uuid;
 
 @RestController
 @RequestMapping("/admin")
@@ -44,6 +45,7 @@ public class SuperAdminController {
 		Md5Hash hash = new Md5Hash(superAdmin.getPassword(), superAdmin.getNum(), 2);
 		superAdmin.setPassword(hash.toString());
 		superAdmin.setStatus(1);//1默认正常使用
+		superAdmin.setUuid(Uuid.getUuid());
 		Integer code = superAdminService.superAdminInsert(superAdmin);
 		String msg = "";
 		if (code == 0) {

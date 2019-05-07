@@ -14,6 +14,7 @@ import com.yijie.manager.client.model.Message;
 import com.yijie.manager.client.model.SafeLog;
 import com.yijie.manager.client.service.MessageService;
 import com.yijie.manager.client.service.SafeLogService;
+import com.yijie.manager.client.utils.Uuid;
 
 @RestController
 @RequestMapping("/admin")
@@ -33,6 +34,7 @@ public class MessageController {
 	@RequestMapping("/messageInsert")
 	public Map<String, Object> messageInsert(@RequestBody Message message){
 		Map<String, Object> map = new HashMap<String, Object>();
+		message.setDate(new Date());
 		Integer code = messageService.messageInsert(message);
 		String msg = "";
 		if (code == 0) {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yijie.manager.client.daoClient.SuperAdminDao;
+import com.yijie.manager.client.model.Admin;
 import com.yijie.manager.client.model.SuperAdmin;
 import com.yijie.manager.client.service.SuperAdminService;
 
@@ -37,6 +38,12 @@ public class SuperAdminServiceImpl implements SuperAdminService{
 	public List<SuperAdmin> superAdminSelect(SuperAdmin superAdmin) {
 		// TODO Auto-generated method stub
 		return superAdminDao.superAdminSelect(superAdmin);
+	}
+
+	@Override
+	public SuperAdmin superAdminLogin(SuperAdmin superAdmin) {
+		// TODO Auto-generated method stub
+		return superAdminDao.superAdminLogin(superAdmin);
 	}
 
 }

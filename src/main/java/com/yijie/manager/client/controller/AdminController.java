@@ -5,6 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,22 +47,30 @@ public class AdminController {
 	@RequestMapping("/adminLogin")
 	public Map<String, Object> adminLogin(@RequestBody Admin admin) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		String msg = null;
-		if (admin.getNum() != null && admin.getPassword() != null) {// 根据电话号登录
-			Admin a = adminService.adminLogin(admin);
-			if (a == null) {
+//		String msg = null;
+		// Shiro认证登录
+		Subject subject = SecurityUtils.getSubject();
+		Md5Hash hash = new Md5Hash(admin.getPassword(), admin.getNum(), 2);
+		AuthenticationToken token = new UsernamePasswordToken(admin.getNum(), hash.toString());
+		try {
+			subject.login(token);
+			Admin a = (Admin) subject.getPrincipal();
+			if (a.getStatus() != 1) {
 				result.put("code", 0);
-				msg = "账户不存在或密码错误！";
+				result.put("msg", "已禁用");
 			} else {
 				result.put("code", 1);
-				msg = "登录成功！";
+				result.put("admin", a);
+				result.put("msg", "登录成功");
 			}
-			result.put("admin", a);
-			result.put("msg", msg);
 			return result;
-		} else {
+		} catch (UnknownAccountException e) {
 			result.put("code", 0);
-			msg = "账户不存在或密码错误！";
+			result.put("msg", "账户不存在");
+			return result;
+		} catch (IncorrectCredentialsException e) {
+			result.put("code", 0);
+			result.put("msg", "密码错误");
 			return result;
 		}
 	}
@@ -70,7 +85,9 @@ public class AdminController {
 	public Map<String, Object> adminInsert(@RequestBody Admin admin) {
 		System.out.println(admin);
 		Map<String, Object> map = new HashMap<String, Object>();
+		Md5Hash hash = new Md5Hash(admin.getPassword(), admin.getNum(), 2);
 		admin.setUuid(Uuid.getUuid());
+		admin.setPassword(hash.toString());
 		admin.setStatus(1);//1正常
 		Integer code = adminService.adminInsert(admin);
 		String msg = "";

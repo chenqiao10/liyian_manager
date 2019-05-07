@@ -2,6 +2,7 @@ package com.yijie.manager.client.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -205,6 +206,27 @@ public class UserHandleController {
 		safeLog.setHandle_date(new Date());
 		safeLogService.safeLogAdd(safeLog);
 		map.put("code", code);
+		return map;
+	}
+	
+	/**
+	 * @ 管理员用户列表
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("/userTable")
+	public Map<String, Object> userTable(@RequestBody User user){
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			List<User> userlist = userHandleService.userSelect(user);
+			map.put("userlist", userlist);
+			map.put("code", 1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "系统出错");
+			map.put("code", 0);
+		}
 		return map;
 	}
 }

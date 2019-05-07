@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yijie.manager.client.model.Admin;
 import com.yijie.manager.client.model.SuperAdmin;
 
 @FeignClient("yijie.zuul.api")
@@ -25,5 +26,9 @@ public interface SuperAdminDao {
 	// 超管信息查询
 	@RequestMapping("/yilianData/admin/superAdminSelect")
 	public List<SuperAdmin> superAdminSelect(SuperAdmin superAdmin);
+	
+	//超级管理账户登录
+	@RequestMapping("/yilianData/admin/superAdminLogin")
+	public SuperAdmin superAdminLogin(SuperAdmin superAdmin);
 
 }

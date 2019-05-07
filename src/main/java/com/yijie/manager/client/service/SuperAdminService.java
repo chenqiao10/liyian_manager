@@ -2,6 +2,7 @@ package com.yijie.manager.client.service;
 
 import java.util.List;
 
+import com.yijie.manager.client.model.Admin;
 import com.yijie.manager.client.model.SuperAdmin;
 
 /**
@@ -22,5 +23,8 @@ public interface SuperAdminService {
 
 	// 超管信息查询
 	public List<SuperAdmin> superAdminSelect(SuperAdmin superAdmin);
+	
+	//管理员信息查询详情
+	public SuperAdmin superAdminLogin(SuperAdmin superAdmin);
 
 }

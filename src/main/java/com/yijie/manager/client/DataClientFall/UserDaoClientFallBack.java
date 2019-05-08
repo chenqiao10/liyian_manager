@@ -36,7 +36,7 @@ public class UserDaoClientFallBack implements UserDao{
 	}
 
 	@Override
-	public Integer userDeleteAll(List<User> userList) {
+	public Integer userDelete(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

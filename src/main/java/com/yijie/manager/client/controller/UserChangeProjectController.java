@@ -59,18 +59,6 @@ public class UserChangeProjectController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = userChangeProjectService.userCheProAdd(userChangeProject);
-			String msg = "";
-			if (code == 0) {
-				msg = "用户交换项目添加失败";
-			} else if (code == 1) {
-				msg = "用户交换项目添加成功";
-			}
-			SafeLog safeLog = new SafeLog();
-			safeLog.setHandle_name(userChangeProject.getHandle_name());
-			safeLog.setHandle_id(userChangeProject.getHandle_id());
-			safeLog.setHandle(msg);
-			safeLog.setHandle_date(new Date());
-			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
 			return result;
 		} catch (Exception e) {
@@ -93,18 +81,6 @@ public class UserChangeProjectController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = userChangeProjectService.userCheProDelete(userChangeProject);
-			String msg = "";
-			if (code == 0) {
-				msg = "用户交换项目删除失败";
-			} else if (code == 1) {
-				msg = "用户交换项目删除成功";
-			}
-			SafeLog safeLog = new SafeLog();
-			safeLog.setHandle_name(userChangeProject.getHandle_name());
-			safeLog.setHandle_id(userChangeProject.getHandle_id());
-			safeLog.setHandle(msg);
-			safeLog.setHandle_date(new Date());
-			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
 			return result;
 		} catch (Exception e) {

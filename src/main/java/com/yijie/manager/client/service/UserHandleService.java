@@ -31,7 +31,7 @@ public interface UserHandleService {
 	public List<User> userSelect(User user);
 	
 	//  用户信息批量删除
-	public Integer userDeleteAll(List<User> userList);
+	public Integer userDelete(User user);
 	
 	// 用户信息条数
 	public Integer userCount(User User);

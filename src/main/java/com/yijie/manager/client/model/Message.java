@@ -36,6 +36,9 @@ public class Message {
 	
 	//操作人id
 	private Integer handle_id;
+	
+	//管理员账户
+	private String admin_num;
 
 	public Integer getId() {
 		return id;
@@ -125,11 +128,20 @@ public class Message {
 		this.handle_id = handle_id;
 	}
 
+	public String getAdmin_num() {
+		return admin_num;
+	}
+
+	public void setAdmin_num(String admin_num) {
+		this.admin_num = admin_num;
+	}
+
 	@Override
 	public String toString() {
 		return "Message [id=" + id + ", content=" + content + ", title=" + title + ", user_id=" + user_id
 				+ ", admin_id=" + admin_id + ", date=" + date + ", status=" + status + ", name=" + name + ", begin="
-				+ begin + ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
+				+ begin + ", handle_name=" + handle_name + ", handle_id=" + handle_id + ", admin_num=" + admin_num
+				+ "]";
 	}
 
 	public Message() {
@@ -138,7 +150,7 @@ public class Message {
 	}
 
 	public Message(Integer id, String content, String title, Integer user_id, Integer admin_id, Date date,
-			Integer status, String name, Integer begin, String handle_name, Integer handle_id) {
+			Integer status, String name, Integer begin, String handle_name, Integer handle_id, String admin_num) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -151,7 +163,9 @@ public class Message {
 		this.begin = begin;
 		this.handle_name = handle_name;
 		this.handle_id = handle_id;
+		this.admin_num = admin_num;
 	}
 
+	
 	
 }

@@ -44,25 +44,19 @@ public class ProjectController {
 	@RequestMapping("/projectBuild")
 	@ResponseBody
 	public Map<String, Object> projectBuild(@RequestBody Projects projects) {
-		System.out.println(projects);
-		projects.setUuid(Uuid.getUuid());
-		projects.setAudit(2);// 2审核中
-		projects.setDate(new Date());
 		Map<String, Object> result = new HashMap<String, Object>();
-		Integer code = projectService.projectBuild(projects);
-		String msg = "";
-		if (code == 0) {
-			msg = "创建项目失败";
-		} else if (code == 1) {
-			msg = "创建项目成功";
+		System.out.println(projects);
+		try {
+			projects.setUuid(Uuid.getUuid());
+			projects.setAudit(2);// 2审核中
+			projects.setDate(new Date());
+			Integer code = projectService.projectBuild(projects);
+			result.put("code", code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result.put("code", 0);
 		}
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(projects.getHandle_name());
-		safeLog.setHandle_id(projects.getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		result.put("code", code);
 		return result;
 	}
 
@@ -130,21 +124,22 @@ public class ProjectController {
 	public Map<String, Object> projectUpdate(@RequestBody Projects projects) {
 		System.out.println(projects);
 		Map<String, Object> result = new HashMap<String, Object>();
+		StringBuffer sb = new StringBuffer();
 		try {
 			Integer code = projectService.projectUpdate(projects);
-			String msg = "";
+			sb.append("管理员账户   ");
+			sb.append(projects.getHandle_name());
 			if (code == 0) {
-				msg = "项目信息更新失败";
+				sb.append(" 修改失败");
 			} else if (code == 1) {
-				msg = "项目信息更新成功";
+				sb.append(" 修改成功");
 			}
 			SafeLog safeLog = new SafeLog();
 			safeLog.setHandle_name(projects.getHandle_name());
 			safeLog.setHandle_id(projects.getHandle_id());
-			safeLog.setHandle(msg);
+			safeLog.setHandle(sb.toString());
 			safeLog.setHandle_date(new Date());
 			safeLogService.safeLogAdd(safeLog);
-//			result.put("projectMessage", code);
 			result.put("code", code);
 			return result;
 		} catch (Exception e) {
@@ -165,18 +160,20 @@ public class ProjectController {
 	public Map<String, Object> projectDelete(@RequestBody Projects projects) {
 		System.out.println(projects);
 		Map<String, Object> result = new HashMap<String, Object>();
+		StringBuffer sb = new StringBuffer();
 		try {
 			Integer code = projectService.projectDelete(projects);
-			String msg = "";
+			sb.append("管理员账户   ");
+			sb.append(projects.getHandle_name());
 			if (code == 0) {
-				msg = "项目删除失败";
+				sb.append(" 删除失败");
 			} else if (code == 1) {
-				msg = "项目删除成功";
+				sb.append(" 删除成功");
 			}
 			SafeLog safeLog = new SafeLog();
 			safeLog.setHandle_name(projects.getHandle_name());
 			safeLog.setHandle_id(projects.getHandle_id());
-			safeLog.setHandle(msg);
+			safeLog.setHandle(sb.toString());
 			safeLog.setHandle_date(new Date());
 			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
@@ -201,18 +198,6 @@ public class ProjectController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = projectService.projectDesignAdd(projectDesigns);
-			String msg = "";
-			if (code == 0) {
-				msg = "项目附件添加失败";
-			} else if (code == 1) {
-				msg = "项目附件添加成功";
-			}
-			SafeLog safeLog = new SafeLog();
-			safeLog.setHandle_name(projectDesigns.get(0).getHandle_name());
-			safeLog.setHandle_id(projectDesigns.get(0).getHandle_id());
-			safeLog.setHandle(msg);
-			safeLog.setHandle_date(new Date());
-			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
 			return result;
 		} catch (Exception e) {
@@ -235,18 +220,6 @@ public class ProjectController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = projectService.projectDesignUpdate(projectDesigns);
-			String msg = "";
-			if (code == 0) {
-				msg = "项目附件修改失败";
-			} else if (code == 1) {
-				msg = "项目附件修改成功";
-			}
-			SafeLog safeLog = new SafeLog();
-			safeLog.setHandle_name(projectDesigns.get(0).getHandle_name());
-			safeLog.setHandle_id(projectDesigns.get(0).getHandle_id());
-			safeLog.setHandle(msg);
-			safeLog.setHandle_date(new Date());
-			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
 			return result;
 		} catch (Exception e) {
@@ -268,18 +241,6 @@ public class ProjectController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = projectService.projectDesignDelete(projectDesign);
-			String msg = "";
-			if (code == 0) {
-				msg = "项目附件删除失败";
-			} else if (code == 1) {
-				msg = "项目附件删除成功";
-			}
-			SafeLog safeLog = new SafeLog();
-			safeLog.setHandle_name(projectDesign.getHandle_name());
-			safeLog.setHandle_id(projectDesign.getHandle_id());
-			safeLog.setHandle(msg);
-			safeLog.setHandle_date(new Date());
-			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
 			return result;
 		} catch (Exception e) {
@@ -322,13 +283,29 @@ public class ProjectController {
 	public Map<String, Object> projectDeleteAll(@RequestBody List<Projects> projectsList) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
-			Integer code = projectService.projectDeleteAll(projectsList);
-			result.put("code", code);
-			return result;
+			for (int i = 0; i < projectsList.size(); i++) {
+				StringBuffer sb = new StringBuffer();
+				Integer code = projectService.projectDelete(projectsList.get(i));
+				sb.append(projectsList.get(i).getHandle_name());// 操作人账户
+				sb.append("	删除项目    ");
+				sb.append(projectsList.get(i).getTitle());
+				if (code == 0) {
+					sb.append("	失败");
+				} else if (code == 1) {
+					sb.append("	成功");
+				}
+				SafeLog safeLog = new SafeLog();
+				safeLog.setHandle_name(projectsList.get(i).getHandle_name());
+				safeLog.setHandle_id(projectsList.get(i).getHandle_id());
+				safeLog.setHandle(sb.toString());
+				safeLog.setHandle_date(new Date());
+				safeLogService.safeLogAdd(safeLog);
+				result.put("code", code);
+			}
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			result.put("code", 0);
-			result.put("msg", "系统出错");
 		}
 		return result;
 	}

@@ -25,11 +25,9 @@ public class ScoreRuleController {
 	@Autowired
 	private SafeLogService safeLogService;
 
-	Map<String, Object> result = new HashMap<String, Object>();
-
 	@RequestMapping("/scoreRuleSelect")
 	public Map<String, Object> scoreRuleSelect(@RequestBody ScoreRule ScoreRule) {
-
+		Map<String, Object> result = new HashMap<String, Object>();
 		System.out.println(ScoreRule);
 		try {
 			List<ScoreRule> list = ScoreRuleService.scoreRuleSelect(ScoreRule);
@@ -47,20 +45,22 @@ public class ScoreRuleController {
 
 	@RequestMapping("/scoreRuleAdd")
 	public Map<String, Object> scoreRuleAdd(@RequestBody ScoreRule ScoreRule) {
-
+		Map<String, Object> result = new HashMap<String, Object>();
+		StringBuffer sb = new StringBuffer();
 		try {
 			ScoreRule.setUuid(Uuid.getUuid());
 			Integer code = ScoreRuleService.scoreRuleAdd(ScoreRule);
-			String msg = "";
+			sb.append("管理员账户   ");
+			sb.append(ScoreRule.getHandle_name());
 			if (code == 0) {
-				msg = "添加积分策略失败";
+				sb.append(" 添加积分策略失败");
 			} else if (code == 1) {
-				msg = "添加积分策略成功";
+				sb.append(" 添加积分策略成功");
 			}
 			SafeLog safeLog = new SafeLog();
 			safeLog.setHandle_name(ScoreRule.getHandle_name());
 			safeLog.setHandle_id(ScoreRule.getHandle_id());
-			safeLog.setHandle(msg);
+			safeLog.setHandle(sb.toString());
 			safeLog.setHandle_date(new Date());
 			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
@@ -76,18 +76,21 @@ public class ScoreRuleController {
 
 	@RequestMapping("/scoreRuleUpdate")
 	public Map<String, Object> scoreRuleUpdate(@RequestBody ScoreRule ScoreRule) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		StringBuffer sb = new StringBuffer();
 		try {
 			Integer code = ScoreRuleService.scoreRuleUpdate(ScoreRule);
-			String msg = "";
+			sb.append("管理员账户   ");
+			sb.append(ScoreRule.getHandle_name());
 			if (code == 0) {
-				msg = "修改积分策略失败";
+				sb.append(" 修改积分策略失败");
 			} else if (code == 1) {
-				msg = "修改积分策略成功";
+				sb.append(" 修改积分策略成功");
 			}
 			SafeLog safeLog = new SafeLog();
 			safeLog.setHandle_name(ScoreRule.getHandle_name());
 			safeLog.setHandle_id(ScoreRule.getHandle_id());
-			safeLog.setHandle(msg);
+			safeLog.setHandle(sb.toString());
 			safeLog.setHandle_date(new Date());
 			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
@@ -103,25 +106,26 @@ public class ScoreRuleController {
 
 	@RequestMapping("/scoreRuleDelete")
 	public Map<String, Object> scoreRuleDelete(@RequestBody ScoreRule ScoreRule) {
-
+		Map<String, Object> result = new HashMap<String, Object>();
+		StringBuffer sb = new StringBuffer();
 		try {
 			Integer code = ScoreRuleService.scoreRuleDelete(ScoreRule);
-			String msg = "";
+			sb.append("管理员账户   ");
+			sb.append(ScoreRule.getHandle_name());
 			if (code == 0) {
-				msg = "积分策略删除失败";
+				sb.append(" 删除积分策略失败");
 			} else if (code == 1) {
-				msg = "积分策略删除成功";
+				sb.append(" 删除积分策略成功");
 			}
 			SafeLog safeLog = new SafeLog();
 			safeLog.setHandle_name(ScoreRule.getHandle_name());
 			safeLog.setHandle_id(ScoreRule.getHandle_id());
-			safeLog.setHandle(msg);
+			safeLog.setHandle(sb.toString());
 			safeLog.setHandle_date(new Date());
 			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
 			return result;
 		} catch (Exception e) {
-
 			e.printStackTrace();
 			result.put("code", 0);
 			result.put("msg", "系统出错");

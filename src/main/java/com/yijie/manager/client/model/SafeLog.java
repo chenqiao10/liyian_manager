@@ -22,6 +22,11 @@ public class SafeLog {
 	//分页起始数据
 	private Integer begin;
 	
+	//起始时间
+	private String starttime;
+	
+	//结束时间
+	private String endtime;
 
 	public Integer getId() {
 		return id;
@@ -71,10 +76,27 @@ public class SafeLog {
 		this.begin = begin;
 	}
 
+	public String getStarttime() {
+		return starttime;
+	}
+
+	public void setStarttime(String starttime) {
+		this.starttime = starttime;
+	}
+
+	public String getEndtime() {
+		return endtime;
+	}
+
+	public void setEndtime(String endtime) {
+		this.endtime = endtime;
+	}
+
 	@Override
 	public String toString() {
 		return "SafeLog [id=" + id + ", handle_name=" + handle_name + ", handle_id=" + handle_id + ", handle=" + handle
-				+ ", handle_date=" + handle_date + ", begin=" + begin + "]";
+				+ ", handle_date=" + handle_date + ", begin=" + begin + ", starttime=" + starttime + ", endtime="
+				+ endtime + "]";
 	}
 
 	public SafeLog() {
@@ -82,7 +104,8 @@ public class SafeLog {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SafeLog(Integer id, String handle_name, Integer handle_id, String handle, Date handle_date, Integer begin) {
+	public SafeLog(Integer id, String handle_name, Integer handle_id, String handle, Date handle_date, Integer begin,
+			String starttime, String endtime) {
 		super();
 		this.id = id;
 		this.handle_name = handle_name;
@@ -90,5 +113,9 @@ public class SafeLog {
 		this.handle = handle;
 		this.handle_date = handle_date;
 		this.begin = begin;
+		this.starttime = starttime;
+		this.endtime = endtime;
 	}
+
+	
 }

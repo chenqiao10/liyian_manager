@@ -14,101 +14,129 @@ import com.yijie.manager.client.model.Message;
 import com.yijie.manager.client.model.SafeLog;
 import com.yijie.manager.client.service.MessageService;
 import com.yijie.manager.client.service.SafeLogService;
-import com.yijie.manager.client.utils.Uuid;
 
 @RestController
 @RequestMapping("/admin")
 public class MessageController {
-	
+
 	@Autowired
 	private MessageService messageService;
-	
+
 	@Autowired
 	private SafeLogService safeLogService;
-	
+
 	/**
 	 * @ 添加推送消息
+	 * 
 	 * @param message
 	 * @return
 	 */
 	@RequestMapping("/messageInsert")
-	public Map<String, Object> messageInsert(@RequestBody Message message){
+	public Map<String, Object> messageInsert(@RequestBody Message message) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		message.setDate(new Date());
-		Integer code = messageService.messageInsert(message);
-		String msg = "";
-		if (code == 0) {
-			msg = "添加推送消息失败";
-		} else if (code == 1) {
-			msg = "添加推送消息成功";
+		Integer code;
+		try {
+			StringBuffer sb = new StringBuffer();
+			message.setDate(new Date());
+			code = messageService.messageInsert(message);
+			sb.append("管理员账户   ");
+			sb.append(message.getAdmin_num());// 添加管理员账户num
+			if (code == 0) {
+				sb.append(" 添加推送消息失败");
+			} else if (code == 1) {
+				sb.append(" 添加推送消息成功");
+			}
+			SafeLog safeLog = new SafeLog();
+			safeLog.setHandle_name(message.getHandle_name());
+			safeLog.setHandle_id(message.getHandle_id());
+			safeLog.setHandle(sb.toString());
+			safeLog.setHandle_date(new Date());
+			safeLogService.safeLogAdd(safeLog);
+			map.put("code", code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("code", 0);
 		}
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(message.getHandle_name());
-		safeLog.setHandle_id(message.getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		map.put("code", code);
 		return map;
 	}
-	
+
 	/**
 	 * @ 推送消息删除
+	 * 
 	 * @param message
 	 * @return
 	 */
 	@RequestMapping("messageDelete")
-	public Map<String, Object> messageDelete(@RequestBody Message message){
+	public Map<String, Object> messageDelete(@RequestBody Message message) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Integer code = messageService.messageDelete(message);
-		String msg = "";
-		if (code == 0) {
-			msg = "推送消息删除失败";
-		} else if (code == 1) {
-			msg = "推送消息删除成功";
+		StringBuffer sb = new StringBuffer();
+		try {
+			Integer code = messageService.messageDelete(message);
+			sb.append("管理员账户   ");
+			sb.append(message.getAdmin_num());// 添加管理员账户num
+			if (code == 0) {
+				sb.append(" 删除推送消息失败");
+			} else if (code == 1) {
+				sb.append(" 删除推送消息成功");
+			}
+			SafeLog safeLog = new SafeLog();
+			safeLog.setHandle_name(message.getHandle_name());
+			safeLog.setHandle_id(message.getHandle_id());
+			safeLog.setHandle(sb.toString());
+			safeLog.setHandle_date(new Date());
+			safeLogService.safeLogAdd(safeLog);
+			map.put("code", code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("code", 0);
 		}
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(message.getHandle_name());
-		safeLog.setHandle_id(message.getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		map.put("code", code);
 		return map;
 	}
-	
+
 	/**
 	 * @ 推送消息修改
+	 * 
 	 * @param message
 	 * @return
 	 */
 	@RequestMapping("messageUpdate")
-	public Map<String, Object> messageUpdate(@RequestBody Message message){
+	public Map<String, Object> messageUpdate(@RequestBody Message message) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Integer code = messageService.messageUpdate(message);
-		String msg = "";
-		if (code == 0) {
-			msg = "推送消息删除失败";
-		} else if (code == 1) {
-			msg = "推送消息删除成功";
+		StringBuffer sb = new StringBuffer();
+		try {
+			Integer code = messageService.messageUpdate(message);
+			sb.append("管理员账户   ");
+			sb.append(message.getAdmin_num());// 添加管理员账户num
+			if (code == 0) {
+				sb.append(" 需改推送消息失败");
+			} else if (code == 1) {
+				sb.append(" 修改推送消息成功");
+			}
+			SafeLog safeLog = new SafeLog();
+			safeLog.setHandle_name(message.getHandle_name());
+			safeLog.setHandle_id(message.getHandle_id());
+			safeLog.setHandle(sb.toString());
+			safeLog.setHandle_date(new Date());
+			safeLogService.safeLogAdd(safeLog);
+			map.put("code", code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("code", 0);
 		}
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(message.getHandle_name());
-		safeLog.setHandle_id(message.getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		map.put("code", code);
 		return map;
 	}
-	
+
 	/**
 	 * @ 推送消息列表
+	 * 
 	 * @param message
 	 * @return
 	 */
 	@RequestMapping("/messageTable")
-	public Map<String, Object> messageTable(@RequestBody Message message){
+	public Map<String, Object> messageTable(@RequestBody Message message) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			List<Message> msglist = messageService.messageTable(message);

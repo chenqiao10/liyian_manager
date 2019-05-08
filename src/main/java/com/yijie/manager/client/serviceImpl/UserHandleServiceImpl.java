@@ -96,9 +96,9 @@ public class UserHandleServiceImpl implements UserHandleService {
 	}
 
 	@Override
-	public Integer userDeleteAll(List<User> userList) {
+	public Integer userDelete(User user) {
 		// TODO Auto-generated method stub
-		return userDao.userDeleteAll(userList);
+		return userDao.userDelete(user);
 	}
 
 	@Override

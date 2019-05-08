@@ -64,18 +64,18 @@ public class ScoreRecordController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = scoreRecordService.scoreRecordAdd(scoreRecord);
-			String msg = "";
-			if (code == 0) {
-				msg = "添加积分记录失败";
-			} else if (code == 1) {
-				msg = "添加积分记录成功";
-			}
-			SafeLog safeLog = new SafeLog();
-			safeLog.setHandle_name(scoreRecord.getHandle_name());
-			safeLog.setHandle_id(scoreRecord.getHandle_id());
-			safeLog.setHandle(msg);
-			safeLog.setHandle_date(new Date());
-			safeLogService.safeLogAdd(safeLog);
+//			String msg = "";
+//			if (code == 0) {
+//				msg = "添加积分记录失败";
+//			} else if (code == 1) {
+//				msg = "添加积分记录成功";
+//			}
+//			SafeLog safeLog = new SafeLog();
+//			safeLog.setHandle_name(scoreRecord.getHandle_name());
+//			safeLog.setHandle_id(scoreRecord.getHandle_id());
+//			safeLog.setHandle(msg);
+//			safeLog.setHandle_date(new Date());
+//			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
 			return result;
 		} catch (
@@ -100,18 +100,6 @@ public class ScoreRecordController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = scoreRecordService.scoreRecordDelete(scoreRecord);
-			String msg = "";
-			if (code == 0) {
-				msg = "积分记录删除失败";
-			} else if (code == 1) {
-				msg = "积分记录删除成功";
-			}
-			SafeLog safeLog = new SafeLog();
-			safeLog.setHandle_name(scoreRecord.getHandle_name());
-			safeLog.setHandle_id(scoreRecord.getHandle_id());
-			safeLog.setHandle(msg);
-			safeLog.setHandle_date(new Date());
-			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
 			return result;
 		} catch (Exception e) {
@@ -134,18 +122,6 @@ public class ScoreRecordController {
 		Map<String, Object> result = new HashMap<String, Object>();
 		try {
 			Integer code = scoreRecordService.scoreRecordUpdate(scoreRecord);
-			String msg = "";
-			if (code == 0) {
-				msg = "修改积分记录失败";
-			} else if (code == 1) {
-				msg = "修改积分记录成功";
-			}
-			SafeLog safeLog = new SafeLog();
-			safeLog.setHandle_name(scoreRecord.getHandle_name());
-			safeLog.setHandle_id(scoreRecord.getHandle_id());
-			safeLog.setHandle(msg);
-			safeLog.setHandle_date(new Date());
-			safeLogService.safeLogAdd(safeLog);
 			result.put("code", code);
 			return result;
 		} catch (Exception e) {

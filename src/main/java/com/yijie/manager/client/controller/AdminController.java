@@ -85,26 +85,19 @@ public class AdminController {
 	public Map<String, Object> adminInsert(@RequestBody Admin admin) {
 		System.out.println(admin);
 		Map<String, Object> map = new HashMap<String, Object>();
-		Md5Hash hash = new Md5Hash(admin.getPassword(), admin.getNum(), 2);
-		admin.setUuid(Uuid.getUuid());
-		admin.setPassword(hash.toString());
-		admin.setStatus(1);//1正常
-		Integer code = adminService.adminInsert(admin);
-		String msg = "";
-		if (code == 0) {
-			msg = "管理员账户信息添加失败";
-		} else if (code == 1) {
-			msg = "管理员账户信息添加成功";
+		try {
+			Md5Hash hash = new Md5Hash(admin.getPassword(), admin.getNum(), 2);
+			admin.setUuid(Uuid.getUuid());
+			admin.setPassword(hash.toString());
+			admin.setStatus(1);// 1正常
+			Integer code = adminService.adminInsert(admin);
+			map.put("code", code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("code", 0);
 		}
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(admin.getHandle_name());
-		safeLog.setHandle_id(admin.getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		map.put("code", code);
 		return map;
-
 	}
 
 	/**
@@ -116,20 +109,14 @@ public class AdminController {
 	@RequestMapping("/adminUpdate")
 	public Map<String, Object> adminUpdate(@RequestBody Admin admin) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Integer code = adminService.adminUpdate(admin);
-		String msg = "";
-		if (code == 0) {
-			msg = "管理员账户信息修改失败";
-		} else if (code == 1) {
-			msg = "管理员账户信息修改成功";
+		try {
+			Integer code = adminService.adminUpdate(admin);
+			map.put("code", code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("code", 0);
 		}
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(admin.getHandle_name());
-		safeLog.setHandle_id(admin.getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		map.put("code", code);
 		return map;
 	}
 
@@ -142,20 +129,28 @@ public class AdminController {
 	@RequestMapping("/adminDelete")
 	public Map<String, Object> adminDelete(@RequestBody Admin admin) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Integer code = adminService.adminDelete(admin);
-		String msg = "";
-		if (code == 0) {
-			msg = "管理员账户信息删除失败";
-		} else if (code == 1) {
-			msg = "管理员账户信息删除成功";
+		StringBuffer sb = new StringBuffer();
+		try {
+			Integer code = adminService.adminDelete(admin);
+			sb.append("管理员账户   ");
+			sb.append(admin.getNum());
+			if (code == 0) {
+				sb.append(" 删除失败");
+			} else if (code == 1) {
+				sb.append(" 删除成功");
+			}
+			SafeLog safeLog = new SafeLog();
+			safeLog.setHandle_name(admin.getHandle_name());
+			safeLog.setHandle_id(admin.getHandle_id());
+			safeLog.setHandle(sb.toString());
+			safeLog.setHandle_date(new Date());
+			safeLogService.safeLogAdd(safeLog);
+			map.put("code", code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("code", 0);
 		}
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(admin.getHandle_name());
-		safeLog.setHandle_id(admin.getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		map.put("code", code);
 		return map;
 	}
 
@@ -180,33 +175,43 @@ public class AdminController {
 		}
 		return map;
 	}
-	
+
 	/**
 	 * 管理员账户信息批量删除
 	 * 
 	 * @param adminList
 	 * @return
 	 */
-	@RequestMapping("/adminDelete")
+	@RequestMapping("/adminDeleteAll")
 	public Map<String, Object> adminDeleteAll(@RequestBody List<Admin> adminList) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Integer code = adminService.adminDeleteAll(adminList);
-		String msg = "";
-		if (code == 0) {
-			msg = "管理员账户信息批量删除失败";
-		} else if (code == 1) {
-			msg = "管理员账户信息批量删除成功";
+		try {
+			for (int i = 0; i < adminList.size(); i++) {
+				StringBuffer sb = new StringBuffer();
+				Integer code = adminService.adminDelete(adminList.get(i));
+				sb.append("删除管理员账户	");
+				sb.append(adminList.get(i).getNum());
+				if (code == 0) {
+					sb.append("	失败");
+				} else if (code == 1) {
+					sb.append("	成功");
+				}
+				SafeLog safeLog = new SafeLog();
+				safeLog.setHandle_name(adminList.get(i).getHandle_name());
+				safeLog.setHandle_id(adminList.get(i).getHandle_id());
+				safeLog.setHandle(sb.toString());
+				safeLog.setHandle_date(new Date());
+				safeLogService.safeLogAdd(safeLog);
+				map.put("code", code);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("code", 0);
 		}
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(adminList.get(0).getHandle_name());
-		safeLog.setHandle_id(adminList.get(0).getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		map.put("code", code);
 		return map;
 	}
-	
+
 	/**
 	 * 管理员账户信息条数
 	 * 
@@ -228,5 +233,5 @@ public class AdminController {
 		}
 		return map;
 	}
-	
+
 }

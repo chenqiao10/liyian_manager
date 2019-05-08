@@ -71,29 +71,35 @@ public class UserHandleController {
 	public Map<String, Object> userRegistForOwn(@RequestBody User user) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		// 个人账户默认审核通过
-		user.setUuid(Uuid.getUuid());
-		user.setAudit(1);
-		user.setLevel(0);
-		Integer code = userHandleService.userRegist(user);
-		// 注册给积分积分
-		if (code != 0) {
-			User user1 = new User();
-			user1.setUuid(user.getInviteUUid());
-			userHandleService.scoreAdd(user1, 10);
+		try {
+			user.setUuid(Uuid.getUuid());
+			user.setAudit(1);
+			user.setLevel(0);
+			Integer code = userHandleService.userRegist(user);
+			// 注册给积分积分
+			if (code != 0) {
+				User user1 = new User();
+				user1.setUuid(user.getInviteUUid());
+				userHandleService.scoreAdd(user1, 10);
+			}
+			String msg = "";
+			if (code == 0) {
+				msg = " 用户注册（个人）失败";
+			} else if (code == 1) {
+				msg = "用户注册（个人）成功";
+			}
+			SafeLog safeLog = new SafeLog();
+			safeLog.setHandle_name(user.getHandle_name());
+			safeLog.setHandle_id(user.getHandle_id());
+			safeLog.setHandle(msg);
+			safeLog.setHandle_date(new Date());
+			safeLogService.safeLogAdd(safeLog);
+			result.put("code", code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result.put("code", 0);
 		}
-		String msg = "";
-		if (code == 0) {
-			msg = " 用户注册（个人）失败";
-		} else if (code == 1) {
-			msg = "用户注册（个人）成功";
-		}
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(user.getHandle_name());
-		safeLog.setHandle_id(user.getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		result.put("code", code);
 		return result;
 	}
 
@@ -105,29 +111,35 @@ public class UserHandleController {
 	@RequestMapping("/userRegistForComplane")
 	public Map<String, Object> userRegistForComplane(@RequestBody User user) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		// 企业账户默认审核中
-		user.setAudit(2);
-		user.setLevel(1);
-		user.setUuid(Uuid.getUuid());
-		Integer code = userHandleService.userRegist(user);
-		// 注册给积分积分
-		// 添加日志
-		String msg = "";
-		if (code == 0) {
-			msg = " 用户注册（企业）失败";
-		} else if (code == 1) {
-			msg = "用户注册（企业）成功";
+		try {
+			// 企业账户默认审核中
+			user.setAudit(2);
+			user.setLevel(1);
+			user.setUuid(Uuid.getUuid());
+			Integer code = userHandleService.userRegist(user);
+			// 注册给积分积分
+			// 添加日志
+			String msg = "";
+			if (code == 0) {
+				msg = " 用户注册（企业）失败";
+			} else if (code == 1) {
+				msg = "用户注册（企业）成功";
+			}
+			User user1 = new User();
+			user1.setUuid(user.getInviteUUid());
+			userHandleService.scoreAdd(user1, 10);
+			SafeLog safeLog = new SafeLog();
+			safeLog.setHandle_name(user.getHandle_name());
+			safeLog.setHandle_id(user.getHandle_id());
+			safeLog.setHandle(msg);
+			safeLog.setHandle_date(new Date());
+			safeLogService.safeLogAdd(safeLog);
+			result.put("code", code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result.put("code", 0);
 		}
-		User user1 = new User();
-		user1.setUuid(user.getInviteUUid());
-		userHandleService.scoreAdd(user1, 10);
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(user.getHandle_name());
-		safeLog.setHandle_id(user.getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		result.put("code", code);
 		return result;
 	}
 
@@ -159,25 +171,37 @@ public class UserHandleController {
 	@RequestMapping("/complaneAuditExamine")
 	public Map<String, Object> complaneAudit(@RequestBody User user) {
 		Map<String, Object> map = new HashMap<String, Object>();
-//		user.setAudit(user.getAudit());// (1.通过，2.审核中那个0.未通过)
+		StringBuffer sb = new StringBuffer();
 		System.out.println(user);
-		Integer code = userHandleService.userUpdate(user);
-		// 添加日志
-		String msg = "";
-		if (user.getAudit() == 2) {
-			msg = "企业注册审核中";
-		} else if (user.getAudit() == 1) {
-			msg = "企业注册审核通过";
-		} else if (user.getAudit() == 0) {
-			msg = "拒绝企业注册";
+		try {
+			Integer code = userHandleService.userUpdate(user);
+			// 添加日志
+			sb.append("账户	");
+			sb.append(user.getNum());
+			if (user.getAudit() == 2) {
+				sb.append("	企业注册审核中");
+			} else if (user.getAudit() == 1) {
+				sb.append("	企业注册审核通过");
+			} else if (user.getAudit() == 0) {
+				sb.append("	企业注册不通过");
+			}
+			if (code == 0) {
+				sb.append("失败");
+			} else {
+				sb.append("成功");
+			}
+			SafeLog safeLog = new SafeLog();
+			safeLog.setHandle_name(user.getHandle_name());
+			safeLog.setHandle_id(user.getHandle_id());
+			safeLog.setHandle(sb.toString());
+			safeLog.setHandle_date(new Date());
+			safeLogService.safeLogAdd(safeLog);
+			map.put("code", code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("code", 0);
 		}
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(user.getHandle_name());
-		safeLog.setHandle_id(user.getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		map.put("code", code);
 		return map;
 	}
 
@@ -189,33 +213,47 @@ public class UserHandleController {
 	@RequestMapping("/complaneUpgrade")
 	public Map<String, Object> complaneUpgrade(@RequestBody User user) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Integer code = userHandleService.userUpdate(user);
-		// 添加日志
-		String msg = "";
-		if (user.getAudit() == 2) {
-			msg = "账户升级为企业账户审核中";
-		} else if (user.getAudit() == 1) {
-			msg = "账户升级为企业账户审核通过";
-		} else if (user.getAudit() == 0) {
-			msg = "拒绝账户升级为企业账户";
+		try {
+			StringBuffer sb = new StringBuffer();
+			Integer code = userHandleService.userUpdate(user);
+			sb.append("账户	");
+			sb.append(user.getNum());
+			// 添加日志
+			if (user.getAudit() == 2) {
+				sb.append("	升级为企业账户审核");
+			} else if (user.getAudit() == 1) {
+				sb.append("	升级为企业账户审核通过");
+			} else if (user.getAudit() == 0) {
+				sb.append("	升级为企业账户不通过");
+			}
+			if (code == 0) {
+				sb.append("失败");
+			} else {
+				sb.append("成功");
+			}
+			SafeLog safeLog = new SafeLog();
+			safeLog.setHandle_name(user.getHandle_name());
+			safeLog.setHandle_id(user.getHandle_id());
+			safeLog.setHandle(sb.toString());
+			safeLog.setHandle_date(new Date());
+			safeLogService.safeLogAdd(safeLog);
+			map.put("code", code);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("code", 0);
 		}
-		SafeLog safeLog = new SafeLog();
-		safeLog.setHandle_name(user.getHandle_name());
-		safeLog.setHandle_id(user.getHandle_id());
-		safeLog.setHandle(msg);
-		safeLog.setHandle_date(new Date());
-		safeLogService.safeLogAdd(safeLog);
-		map.put("code", code);
 		return map;
 	}
-	
+
 	/**
 	 * @ 用户列表
+	 * 
 	 * @param user
 	 * @return
 	 */
 	@RequestMapping("/userTable")
-	public Map<String, Object> userTable(@RequestBody User user){
+	public Map<String, Object> userTable(@RequestBody User user) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			List<User> userlist = userHandleService.userSelect(user);
@@ -229,14 +267,15 @@ public class UserHandleController {
 		}
 		return map;
 	}
-	
+
 	/**
 	 * @ 用户信息条数
+	 * 
 	 * @param user
 	 * @return
 	 */
 	@RequestMapping("/userCount")
-	public Map<String, Object> userCount(@RequestBody User user){
+	public Map<String, Object> userCount(@RequestBody User user) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			Integer count = userHandleService.userCount(user);
@@ -250,26 +289,64 @@ public class UserHandleController {
 		}
 		return map;
 	}
-	
+
 	/**
 	 * @ 用户信息批量删除
+	 * 
 	 * @param user
 	 * @return
 	 */
 	@RequestMapping("/userDeleteAll")
-	public Map<String, Object> userDeleteAll(@RequestBody List<User> userList){
+	public Map<String, Object> userDeleteAll(@RequestBody List<User> userList) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			Integer code = userHandleService.userDeleteAll(userList);
+			for (int i = 0; i < userList.size(); i++) {
+				StringBuffer sb = new StringBuffer();
+				Integer code = userHandleService.userDelete(userList.get(i));
+				sb.append("删除账户	");
+				sb.append(userList.get(i).getNum());
+				if (code == 0) {
+					sb.append("	失败");
+				} else if (code == 1) {
+					sb.append("	成功");
+				}
+				SafeLog safeLog = new SafeLog();
+				safeLog.setHandle_name(userList.get(i).getHandle_name());
+				safeLog.setHandle_id(userList.get(i).getHandle_id());
+				safeLog.setHandle(sb.toString());
+				safeLog.setHandle_date(new Date());
+				safeLogService.safeLogAdd(safeLog);
+				map.put("code", code);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "系统出错");
+			map.put("code", 0);
+		}
+		return map;
+	}
+
+	/**
+	 * @ 用户信息修改
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("/userUpdate")
+	public Map<String, Object> userUpdate(@RequestBody User user) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			Integer code = userHandleService.userUpdate(user);
 			String msg = "";
 			if (code == 0) {
-				msg = "用户信息批量删除失败";
+				msg = "用户信息修改失败";
 			} else if (code == 1) {
-				msg = "用户信息批量删除成功";
+				msg = "用户信息修改成功";
 			}
 			SafeLog safeLog = new SafeLog();
-			safeLog.setHandle_name(userList.get(0).getHandle_name());
-			safeLog.setHandle_id(userList.get(0).getHandle_id());
+			safeLog.setHandle_name(user.getHandle_name());
+			safeLog.setHandle_id(user.getHandle_id());
 			safeLog.setHandle(msg);
 			safeLog.setHandle_date(new Date());
 			safeLogService.safeLogAdd(safeLog);

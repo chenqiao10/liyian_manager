@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yijie.manager.client.DataClientFall.MessageDaoClientFallBack;
 import com.yijie.manager.client.model.Message;
 
 /**
@@ -13,7 +14,7 @@ import com.yijie.manager.client.model.Message;
  * @author sunzhu
  *
  */
-@FeignClient("yijie.zuul.api")
+@FeignClient(name = "yijie.zuul.api", fallback = MessageDaoClientFallBack.class)
 public interface MessageDao {
 	// 推送消息查询
 	@RequestMapping("/yilianData/admin/messageSelect")

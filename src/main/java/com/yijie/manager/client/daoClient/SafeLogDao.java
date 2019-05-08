@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yijie.manager.client.DataClientFall.SafeLogDaoClientFallBack;
 import com.yijie.manager.client.model.SafeLog;
 
 /**
@@ -13,7 +14,7 @@ import com.yijie.manager.client.model.SafeLog;
  * @author sunzhu
  *
  */
-@FeignClient("yijie.zuul.api")
+@FeignClient(name = "yijie.zuul.api" ,fallback = SafeLogDaoClientFallBack.class)
 public interface SafeLogDao {
 	//积分记录查询
 	@RequestMapping("/yilianData/admin/logSelect")

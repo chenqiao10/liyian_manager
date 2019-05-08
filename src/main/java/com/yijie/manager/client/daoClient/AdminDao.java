@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yijie.manager.client.DataClientFall.AdminDaoClientFallBack;
 import com.yijie.manager.client.model.Admin;
 
 /**
@@ -13,7 +14,7 @@ import com.yijie.manager.client.model.Admin;
  * @author sunzhu
  *
  */
-@FeignClient("yijie.zuul.api")
+@FeignClient(name = "yijie.zuul.api",fallback = AdminDaoClientFallBack.class)
 public interface AdminDao {
 	
 	//管理账户信息查询

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yijie.manager.client.DataClientFall.UserDaoClientFallBack;
 import com.yijie.manager.client.model.User;
 
 /**
@@ -12,7 +13,7 @@ import com.yijie.manager.client.model.User;
  * 
  * @author chenqiao yijie.zuul.api
  */
-@FeignClient("yijie.zuul.api")
+@FeignClient(name = "yijie.zuul.api",fallback = UserDaoClientFallBack.class)
 public interface UserDao {
 	@RequestMapping("/yilianData/user/userLogin")
 	public User userLogin(User user);

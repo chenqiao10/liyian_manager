@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yijie.manager.client.DataClientFall.ProjectDaoClientFallBack;
 import com.yijie.manager.client.model.ProjectDesign;
 import com.yijie.manager.client.model.Projects;
 
@@ -15,7 +16,7 @@ import com.yijie.manager.client.model.Projects;
  * @author chenqiao
  *
  */
-@FeignClient("yijie.zuul.api")
+@FeignClient(name = "yijie.zuul.api",fallback = ProjectDaoClientFallBack.class)
 public interface ProjectDao {
 	// 项目详细信息
 	@RequestMapping("/yilianData/project/projectMessage")
@@ -48,4 +49,8 @@ public interface ProjectDao {
 	// 项目附件删除
 	@RequestMapping("/yilianData/project/projectDesignDelete")
 	public Integer projectDesignDelete(ProjectDesign projectDesign);
+	
+	// 查询项目条数
+	@RequestMapping("yilianData/project/projectCount")
+	public Integer projectCount(Projects projects);
 }

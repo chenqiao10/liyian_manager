@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.yijie.manager.client.model.Admin;
+import com.yijie.manager.client.DataClientFall.SuperAdminDaoClientFallBack;
 import com.yijie.manager.client.model.SuperAdmin;
 
-@FeignClient("yijie.zuul.api")
+@FeignClient(name = "yijie.zuul.api",fallback = SuperAdminDaoClientFallBack.class)
 public interface SuperAdminDao {
 	
 	// 超管信息添加

@@ -290,4 +290,46 @@ public class ProjectController {
 		}
 	}
 
+	/**
+	 * @ 查询项目条数
+	 * 
+	 * @param projects
+	 * @return
+	 */
+	@RequestMapping("/projectCount")
+	public Map<String, Object> projectCount(@RequestBody Projects projects) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			Integer count = projectService.projectCount(projects);
+			result.put("count", count);
+			result.put("code", 1);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("code", 0);
+			result.put("msg", "系统出错");
+		}
+		return result;
+	}
+
+	/**
+	 * @ 项目批量删除
+	 * 
+	 * @param projects
+	 * @return
+	 */
+	@RequestMapping("/projectDeleteAll")
+	public Map<String, Object> projectDeleteAll(@RequestBody List<Projects> projectsList) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			Integer code = projectService.projectDeleteAll(projectsList);
+			result.put("code", code);
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("code", 0);
+			result.put("msg", "系统出错");
+		}
+		return result;
+	}
 }

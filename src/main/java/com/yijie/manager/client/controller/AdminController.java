@@ -180,4 +180,53 @@ public class AdminController {
 		}
 		return map;
 	}
+	
+	/**
+	 * 管理员账户信息批量删除
+	 * 
+	 * @param adminList
+	 * @return
+	 */
+	@RequestMapping("/adminDelete")
+	public Map<String, Object> adminDeleteAll(@RequestBody List<Admin> adminList) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Integer code = adminService.adminDeleteAll(adminList);
+		String msg = "";
+		if (code == 0) {
+			msg = "管理员账户信息批量删除失败";
+		} else if (code == 1) {
+			msg = "管理员账户信息批量删除成功";
+		}
+		SafeLog safeLog = new SafeLog();
+		safeLog.setHandle_name(adminList.get(0).getHandle_name());
+		safeLog.setHandle_id(adminList.get(0).getHandle_id());
+		safeLog.setHandle(msg);
+		safeLog.setHandle_date(new Date());
+		safeLogService.safeLogAdd(safeLog);
+		map.put("code", code);
+		return map;
+	}
+	
+	/**
+	 * 管理员账户信息条数
+	 * 
+	 * @param admin
+	 * @return
+	 */
+	@RequestMapping("/adminCount")
+	public Map<String, Object> adminCount(@RequestBody Admin admin) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			Integer count = adminService.adminCount(admin);
+			map.put("code", 1);
+			map.put("count", count);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("code", 0);
+			map.put("msg", "系统出错");
+		}
+		return map;
+	}
+	
 }

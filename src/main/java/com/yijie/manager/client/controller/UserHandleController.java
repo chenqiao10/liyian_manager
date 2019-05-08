@@ -210,7 +210,7 @@ public class UserHandleController {
 	}
 	
 	/**
-	 * @ 管理员用户列表
+	 * @ 用户列表
 	 * @param user
 	 * @return
 	 */
@@ -221,6 +221,59 @@ public class UserHandleController {
 			List<User> userlist = userHandleService.userSelect(user);
 			map.put("userlist", userlist);
 			map.put("code", 1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "系统出错");
+			map.put("code", 0);
+		}
+		return map;
+	}
+	
+	/**
+	 * @ 用户信息条数
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("/userCount")
+	public Map<String, Object> userCount(@RequestBody User user){
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			Integer count = userHandleService.userCount(user);
+			map.put("count", count);
+			map.put("code", 1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "系统出错");
+			map.put("code", 0);
+		}
+		return map;
+	}
+	
+	/**
+	 * @ 用户信息批量删除
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping("/userDeleteAll")
+	public Map<String, Object> userDeleteAll(@RequestBody List<User> userList){
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			Integer code = userHandleService.userDeleteAll(userList);
+			String msg = "";
+			if (code == 0) {
+				msg = "用户信息批量删除失败";
+			} else if (code == 1) {
+				msg = "用户信息批量删除成功";
+			}
+			SafeLog safeLog = new SafeLog();
+			safeLog.setHandle_name(userList.get(0).getHandle_name());
+			safeLog.setHandle_id(userList.get(0).getHandle_id());
+			safeLog.setHandle(msg);
+			safeLog.setHandle_date(new Date());
+			safeLogService.safeLogAdd(safeLog);
+			map.put("code", code);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

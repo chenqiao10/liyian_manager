@@ -39,4 +39,10 @@ public class SafeLogServiceImpl implements SafeLogService{
 		return safeLogDao.safeLogDelete(safeLog);
 	}
 
+	@Override
+	public Integer logCount(SafeLog safeLog) {
+		// TODO Auto-generated method stub
+		return safeLogDao.safelogCount(safeLog);
+	}
+
 }

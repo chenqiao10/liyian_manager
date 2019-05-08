@@ -2,6 +2,8 @@ package com.yijie.manager.client.service;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.yijie.manager.client.model.SafeLog;
 
 /**
@@ -22,5 +24,8 @@ public interface SafeLogService {
 	
 	//积分安全日志记录
 	public Integer safeLogDelete(SafeLog safeLog);
+	
+	//积分记录条数
+	public Integer logCount(SafeLog safeLog);
 
 }

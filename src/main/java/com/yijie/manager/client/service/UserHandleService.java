@@ -23,11 +23,17 @@ public interface UserHandleService {
 	public Integer userUpdate(User user);
 
 	// 用户添加积分
-	public Integer scoreAdd(User User, Integer score);
+	public Integer scoreAdd(User user, Integer score);
 
 	// 用户扣除积分
-	public Integer scoreDel(User User, Integer score);
+	public Integer scoreDel(User user, Integer score);
 	
 	public List<User> userSelect(User user);
+	
+	//  用户信息批量删除
+	public Integer userDeleteAll(List<User> userList);
+	
+	// 用户信息条数
+	public Integer userCount(User User);
 
 }

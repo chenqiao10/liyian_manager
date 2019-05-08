@@ -26,5 +26,13 @@ public interface UserDao {
 
 	@RequestMapping("/yilianData/user/userUpdate")
 	public Integer userUpdate(User user);
+	
+	//  用户信息批量删除
+	@RequestMapping("/yilianData/user/userDeleteAll")
+	public Integer userDeleteAll(List<User> userList);
+	
+	// 用户信息条数
+	@RequestMapping("/yilianData/user/UserCount")
+	public Integer userCount(User user);
 
 }

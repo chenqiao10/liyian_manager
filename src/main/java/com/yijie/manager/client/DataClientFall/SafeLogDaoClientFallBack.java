@@ -33,4 +33,10 @@ public class SafeLogDaoClientFallBack implements SafeLogDao{
 		return null;
 	}
 
+	@Override
+	public Integer safelogCount(SafeLog safeLog) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

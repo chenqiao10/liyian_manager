@@ -35,5 +35,17 @@ public class UserDaoClientFallBack implements UserDao{
 		return null;
 	}
 
+	@Override
+	public Integer userDeleteAll(List<User> userList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer userCount(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

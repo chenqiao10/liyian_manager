@@ -31,5 +31,9 @@ public interface SafeLogDao {
 	//积分记录删除
 	@RequestMapping("/yilianData/admin/logDelete")
 	public Integer safeLogDelete(SafeLog safeLog);
+	
+	//积分记录条数
+	@RequestMapping("/yilianData/admin/logCount")
+	public Integer safelogCount(SafeLog safeLog);
 
 }

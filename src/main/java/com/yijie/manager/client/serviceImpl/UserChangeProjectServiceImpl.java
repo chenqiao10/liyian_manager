@@ -51,4 +51,10 @@ public class UserChangeProjectServiceImpl implements UserChangeProjectService {
 
 	}
 
+	@Override
+	public Integer userCheProCount(UserChangeProject userChangeProject) {
+		// TODO Auto-generated method stub
+		return userCheProDao.userCheProCount(userChangeProject);
+	}
+
 }

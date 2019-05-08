@@ -8,7 +8,7 @@ import com.yijie.manager.client.daoClient.AdminDao;
 import com.yijie.manager.client.model.Admin;
 
 @Component
-public class AdminDaoClientFallBack implements AdminDao{
+public class AdminDaoClientFallBack implements AdminDao {
 
 	@Override
 	public List<Admin> adminTable(Admin admin) {
@@ -36,6 +36,18 @@ public class AdminDaoClientFallBack implements AdminDao{
 
 	@Override
 	public Integer adminInsert(Admin admin) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer adminDeleteAll(List<Admin> adminList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer adminCount(Admin admin) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -25,5 +25,11 @@ public interface AdminService {
 	
 	//添加管理员信息
 	public Integer adminInsert(Admin admin);
+	
+	//管理员信息批量删除
+	public Integer adminDeleteAll(List<Admin> adminList);
+	
+	//管理员信息条数
+	public Integer adminCount(Admin admin);
 
 }

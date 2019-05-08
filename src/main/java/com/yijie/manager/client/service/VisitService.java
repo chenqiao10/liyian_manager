@@ -10,14 +10,14 @@ import com.yijie.manager.client.model.Visit;
  *
  */
 public interface VisitService {
-	
-	//添加用户访问记录
+
+	// 添加用户访问记录
 	public Integer visitAdd(Visit visit);
-	
-	//用户访问记录查询
+
+	// 用户访问记录查询
 	public List<Visit> visitTable(Visit visit);
-	
-	//用户访问记录修改
+
+	// 用户访问记录修改
 	public Integer visitUpdate(Visit visit);
 
 }

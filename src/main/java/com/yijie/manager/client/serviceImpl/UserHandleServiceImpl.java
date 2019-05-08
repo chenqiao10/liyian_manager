@@ -94,4 +94,16 @@ public class UserHandleServiceImpl implements UserHandleService {
 		// TODO Auto-generated method stub
 		return userDao.userTable(user);
 	}
+
+	@Override
+	public Integer userDeleteAll(List<User> userList) {
+		// TODO Auto-generated method stub
+		return userDao.userDeleteAll(userList);
+	}
+
+	@Override
+	public Integer userCount(User user) {
+		// TODO Auto-generated method stub
+		return userDao.userCount(user);
+	}
 }

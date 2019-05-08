@@ -9,7 +9,7 @@ import com.yijie.manager.client.model.UserChangeProject;
 
 
 @Component
-public class USerCheProDaoClientFallBack implements UserCheProDao{
+public class UserCheProDaoClientFallBack implements UserCheProDao{
 	@Override
 	public List<UserChangeProject> userCheProTable(UserChangeProject userChangeProject) {
 		// TODO 自动生成的方法存根
@@ -25,6 +25,12 @@ public class USerCheProDaoClientFallBack implements UserCheProDao{
 	@Override
 	public Integer userCheProAdd(UserChangeProject userChangeProject) {
 		// TODO 自动生成的方法存根
+		return null;
+	}
+
+	@Override
+	public Integer userCheProCount(UserChangeProject userChangeProject) {
+		// TODO Auto-generated method stub
 		return null;
 	}
      

@@ -65,4 +65,10 @@ public class ProjectDaoClientFallBack implements ProjectDao {
 		return null;
 	}
 
+	@Override
+	public Integer projectDeleteAll(List<Projects> projectsList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

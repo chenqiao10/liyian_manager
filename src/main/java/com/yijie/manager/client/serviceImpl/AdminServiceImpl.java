@@ -50,4 +50,16 @@ public class AdminServiceImpl implements AdminService{
 		return adminDao.adminLogin(admin);
 	}
 
+	@Override
+	public Integer adminDeleteAll(List<Admin> adminList) {
+		// TODO Auto-generated method stub
+		return adminDao.adminDeleteAll(adminList);
+	}
+
+	@Override
+	public Integer adminCount(Admin admin) {
+		// TODO Auto-generated method stub
+		return adminDao.adminCount(admin);
+	}
+
 }

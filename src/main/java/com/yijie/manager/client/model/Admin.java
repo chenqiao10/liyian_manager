@@ -30,6 +30,9 @@ public class Admin {
 	
 	//操作人id
 	private Integer handle_id;
+	
+	//分页起始条数
+	private Integer begin;
 
 	public Integer getId() {
 		return id;
@@ -95,10 +98,19 @@ public class Admin {
 		this.handle_id = handle_id;
 	}
 
+	public Integer getBegin() {
+		return begin;
+	}
+
+	public void setBegin(Integer begin) {
+		this.begin = begin;
+	}
+
 	@Override
 	public String toString() {
 		return "Admin [id=" + id + ", uuid=" + uuid + ", num=" + num + ", password=" + password + ", name=" + name
-				+ ", status=" + status + ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
+				+ ", status=" + status + ", handle_name=" + handle_name + ", handle_id=" + handle_id + ", begin="
+				+ begin + "]";
 	}
 
 	public Admin() {
@@ -107,7 +119,7 @@ public class Admin {
 	}
 
 	public Admin(Integer id, String uuid, String num, String password, String name, Integer status, String handle_name,
-			Integer handle_id) {
+			Integer handle_id, Integer begin) {
 		super();
 		this.id = id;
 		this.uuid = uuid;
@@ -117,6 +129,7 @@ public class Admin {
 		this.status = status;
 		this.handle_name = handle_name;
 		this.handle_id = handle_id;
+		this.begin = begin;
 	}
 
 	

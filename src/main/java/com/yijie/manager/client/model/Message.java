@@ -28,6 +28,9 @@ public class Message {
 	// 用户名
 	private String name;
 	
+	//分页起始条数
+	private Integer begin;
+	
 	//操作人名字
 	private String handle_name;
 	
@@ -98,6 +101,14 @@ public class Message {
 		this.name = name;
 	}
 
+	public Integer getBegin() {
+		return begin;
+	}
+
+	public void setBegin(Integer begin) {
+		this.begin = begin;
+	}
+
 	public String getHandle_name() {
 		return handle_name;
 	}
@@ -117,8 +128,8 @@ public class Message {
 	@Override
 	public String toString() {
 		return "Message [id=" + id + ", content=" + content + ", title=" + title + ", user_id=" + user_id
-				+ ", admin_id=" + admin_id + ", date=" + date + ", status=" + status + ", name=" + name
-				+ ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
+				+ ", admin_id=" + admin_id + ", date=" + date + ", status=" + status + ", name=" + name + ", begin="
+				+ begin + ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
 	}
 
 	public Message() {
@@ -127,7 +138,7 @@ public class Message {
 	}
 
 	public Message(Integer id, String content, String title, Integer user_id, Integer admin_id, Date date,
-			Integer status, String name, String handle_name, Integer handle_id) {
+			Integer status, String name, Integer begin, String handle_name, Integer handle_id) {
 		super();
 		this.id = id;
 		this.content = content;
@@ -137,7 +148,10 @@ public class Message {
 		this.date = date;
 		this.status = status;
 		this.name = name;
+		this.begin = begin;
 		this.handle_name = handle_name;
 		this.handle_id = handle_id;
 	}
+
+	
 }

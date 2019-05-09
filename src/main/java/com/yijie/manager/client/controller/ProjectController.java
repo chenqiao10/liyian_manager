@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yijie.manager.client.model.ProjectDesign;
 import com.yijie.manager.client.model.Projects;
 import com.yijie.manager.client.model.SafeLog;
+import com.yijie.manager.client.model.ScoreRule;
 import com.yijie.manager.client.model.User;
 import com.yijie.manager.client.service.ProjectService;
 import com.yijie.manager.client.service.SafeLogService;
+import com.yijie.manager.client.service.ScoreRuleService;
 import com.yijie.manager.client.service.UserHandleService;
 import com.yijie.manager.client.utils.Uuid;
 
@@ -35,6 +37,8 @@ public class ProjectController {
 	private UserHandleService UserHandleService;
 	@Autowired
 	private SafeLogService safeLogService;
+	@Autowired
+	private ScoreRuleService ScoreRuleService;
 
 	/**
 	 * @描述 创建项目
@@ -95,8 +99,18 @@ public class ProjectController {
 		System.out.println(projects);
 		Map<String, Object> result = new HashMap<String, Object>();
 		if (projects.getId() != null || projects.getUuid() != null) {
+			Integer scor = null;
 			try {
+				if (projects.getAudit() == 2) {
+					// 审核中点击详情计算积分
+					ScoreRule rule = new ScoreRule();
+					rule.setMax_budget(projects.getMax_budget());
+					rule.setMin_budget(projects.getMin_budget());
+					List<ScoreRule> score = ScoreRuleService.scoreRuleSelect(rule);
+					scor = score.get(0).getScore_budget();
+				}
 				Projects project = projectService.projectMessage(projects);
+				project.setPrice(scor);
 				User user = new User();
 				user.setUuid(project.getUser_uuid());
 				String name = UserHandleService.userLogin(user).getName();
@@ -260,9 +274,41 @@ public class ProjectController {
 	@RequestMapping("/projectCount")
 	public Map<String, Object> projectCount(@RequestBody Projects projects) {
 		Map<String, Object> result = new HashMap<String, Object>();
+			try {
+				Integer count = projectService.projectCount(projects);
+				result.put("count", count);
+				result.put("code", 1);
+			} catch (Exception e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+				result.put("code", 0);
+			}
+			return result;
+	}
+	/**
+	 * @描述 项目审核Audit/0未通过/1通过
+	 * @param projects
+	 * @return
+	 */
+	@RequestMapping("/projectAudit")
+	public Map<String, Object> projectAudit(@RequestBody Projects projects) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		SafeLog log = new SafeLog();
+		StringBuffer sb = new StringBuffer();
+		sb.append("用户: ");
+		sb.append(projects.getPhone());
+		sb.append("项目名: ");
+		sb.append(projects.getTitle());
+		log.setHandle_name(projects.getHandle_name());
+		log.setHandle_id(projects.getHandle_id());
 		try {
-			Integer count = projectService.projectCount(projects);
-			result.put("count", count);
+			if (projects.getAudit() == 0) {
+				sb.append("项目审核通过");
+			} else if (projects.getAudit() == 1) {
+				sb.append("项目未审核通过");
+			}
+			Integer code = projectService.projectUpdate(projects);
+			result.put("projectMessage", code);
 			result.put("code", 1);
 			return result;
 		} catch (Exception e) {
@@ -309,4 +355,5 @@ public class ProjectController {
 		}
 		return result;
 	}
+
 }

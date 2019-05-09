@@ -18,25 +18,25 @@ public class SafeLogDaoClientFallBack implements SafeLogDao{
 	@Override
 	public Integer safeLogInsert(SafeLog safeLog) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer safeLogUpdate(SafeLog safeLog) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer safeLogDelete(SafeLog safeLog) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer safelogCount(SafeLog safeLog) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 }

@@ -18,19 +18,19 @@ public class MessageDaoClientFallBack implements MessageDao{
 	@Override
 	public Integer messageDelete(Message message) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer messageUpdate(Message message) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer messageInsert(Message message) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 }

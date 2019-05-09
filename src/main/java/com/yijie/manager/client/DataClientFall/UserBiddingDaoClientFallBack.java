@@ -27,19 +27,19 @@ public class UserBiddingDaoClientFallBack implements UserBiddingDao{
 	@Override
 	public Integer userBiddingInsert(UserBidding userBidding) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer userBiddingUpdate(UserBidding userBidding) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer userBiddingDelete(UserBidding userBidding) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 }

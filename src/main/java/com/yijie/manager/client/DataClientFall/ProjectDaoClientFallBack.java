@@ -26,49 +26,49 @@ public class ProjectDaoClientFallBack implements ProjectDao {
 	@Override
 	public Integer projectBuild(Projects pro) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer projectDelete(Projects pro) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer projectUpdate(Projects pro) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer projectDesignAdd(List<ProjectDesign> projectDesign) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer projectDesignUpdate(List<ProjectDesign> projectDesign) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer projectDesignDelete(ProjectDesign projectDesign) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer projectCount(Projects projects) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer projectDeleteAll(List<Projects> projectsList) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 }

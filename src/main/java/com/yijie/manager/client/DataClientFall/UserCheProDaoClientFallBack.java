@@ -19,19 +19,19 @@ public class UserCheProDaoClientFallBack implements UserCheProDao{
 	@Override
 	public Integer userCheProDelete(UserChangeProject userChangeProject) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer userCheProAdd(UserChangeProject userChangeProject) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer userCheProCount(UserChangeProject userChangeProject) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
      
 }

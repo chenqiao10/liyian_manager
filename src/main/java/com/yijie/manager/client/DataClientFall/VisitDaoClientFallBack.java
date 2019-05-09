@@ -21,13 +21,13 @@ public class VisitDaoClientFallBack implements VisitDao{
 	@Override
 	public Integer visitInsert(Visit visit) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer visitUpdate(Visit visit) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 }

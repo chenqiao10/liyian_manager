@@ -21,19 +21,19 @@ public class ScoreDaoClientFallBack implements ScoreDao{
 	@Override
 	public Integer scoreRuleAdd(ScoreRule ScoreRule) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer scoreRuleUpdate(ScoreRule ScoreRule) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer scoreRuleDelete(ScoreRule ScoreRule) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
@@ -45,19 +45,19 @@ public class ScoreDaoClientFallBack implements ScoreDao{
 	@Override
 	public Integer scoreRecordInsert(ScoreRecord scoreRecord) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer scoreRecordUpdate(ScoreRecord scoreRecord) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer scoreRecordDelete(ScoreRecord scoreRecord) {
 		// TODO 自动生成的方法存根
-		return null;
+		return 0;
 	}
 
 }

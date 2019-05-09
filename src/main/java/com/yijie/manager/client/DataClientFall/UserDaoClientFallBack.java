@@ -26,25 +26,25 @@ public class UserDaoClientFallBack implements UserDao{
 	@Override
 	public Integer userRegist(User user) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer userUpdate(User user) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer userDelete(User user) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer userCount(User user) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 

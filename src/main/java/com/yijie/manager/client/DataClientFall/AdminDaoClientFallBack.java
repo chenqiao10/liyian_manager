@@ -25,31 +25,31 @@ public class AdminDaoClientFallBack implements AdminDao {
 	@Override
 	public Integer adminDelete(Admin admin) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer adminUpdate(Admin admin) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer adminInsert(Admin admin) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer adminDeleteAll(List<Admin> adminList) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer adminCount(Admin admin) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 }

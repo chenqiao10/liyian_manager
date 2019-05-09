@@ -12,19 +12,19 @@ public class SuperAdminDaoClientFallBack implements SuperAdminDao{
 	@Override
 	public Integer superAdminInsert(SuperAdmin superAdmin) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer superAdminDelete(SuperAdmin superAdmin) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer superAdminUpdate(SuperAdmin superAdmin) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override

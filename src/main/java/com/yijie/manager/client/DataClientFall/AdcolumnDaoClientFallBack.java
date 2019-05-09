@@ -22,19 +22,19 @@ public class AdcolumnDaoClientFallBack implements AdcolumnDao {
 	@Override
 	public Integer adcolumnDelete(Adcolumn adcolumn) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer adcolumnUpdate(Adcolumn adcolumn) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	@Override
 	public Integer adcolumnInsert(Adcolumn adcolumn) {
 		// TODO Auto-generated method stub
-		return null;
+		return 0;
 	}
 
 	

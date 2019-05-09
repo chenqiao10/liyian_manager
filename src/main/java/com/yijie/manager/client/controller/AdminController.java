@@ -110,6 +110,10 @@ public class AdminController {
 	public Map<String, Object> adminUpdate(@RequestBody Admin admin) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
+			if(admin.getPassword()!=null) {
+				Md5Hash hash = new Md5Hash(admin.getPassword(), admin.getNum(), 2);
+				admin.setPassword(hash.toString());
+			}
 			Integer code = adminService.adminUpdate(admin);
 			map.put("code", code);
 		} catch (Exception e) {

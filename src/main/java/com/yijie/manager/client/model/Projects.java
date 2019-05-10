@@ -70,6 +70,53 @@ public class Projects {
 	// 操作人id
 	private Integer handle_id;
 
+	// 小于5的未完成项目
+	private Integer min_cha;
+
+	public Projects(Integer id, String uuid, String user_uuid, String title, String message, String area, Integer days,
+			Double min_budget, Double max_budget, String phone, String oicq, String type, Integer price, Integer audit,
+			Integer click_count, Integer cha_count, Date date, List<ProjectDesign> designs, Integer begin,
+			String handle_name, Integer handle_id, Integer min_cha) {
+		super();
+		this.id = id;
+		this.uuid = uuid;
+		this.user_uuid = user_uuid;
+		this.title = title;
+		this.message = message;
+		this.area = area;
+		this.days = days;
+		this.min_budget = min_budget;
+		this.max_budget = max_budget;
+		this.phone = phone;
+		this.oicq = oicq;
+		this.type = type;
+		this.price = price;
+		this.audit = audit;
+		this.click_count = click_count;
+		this.cha_count = cha_count;
+		this.date = date;
+		this.designs = designs;
+		this.begin = begin;
+		this.handle_name = handle_name;
+		this.handle_id = handle_id;
+		this.min_cha = min_cha;
+	}
+
+	@Override
+	public String toString() {
+		return "Projects [id=" + id + ", uuid=" + uuid + ", user_uuid=" + user_uuid + ", title=" + title + ", message="
+				+ message + ", area=" + area + ", days=" + days + ", min_budget=" + min_budget + ", max_budget="
+				+ max_budget + ", phone=" + phone + ", oicq=" + oicq + ", type=" + type + ", price=" + price
+				+ ", audit=" + audit + ", click_count=" + click_count + ", cha_count=" + cha_count + ", date=" + date
+				+ ", designs=" + designs + ", begin=" + begin + ", handle_name=" + handle_name + ", handle_id="
+				+ handle_id + ", min_cha=" + min_cha + "]";
+	}
+
+	public Projects() {
+		super();
+		// TODO 自动生成的构造函数存根
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -238,47 +285,12 @@ public class Projects {
 		this.handle_id = handle_id;
 	}
 
-	@Override
-	public String toString() {
-		return "Projects [id=" + id + ", uuid=" + uuid + ", user_uuid=" + user_uuid + ", title=" + title + ", message="
-				+ message + ", area=" + area + ", days=" + days + ", min_budget=" + min_budget + ", max_budget="
-				+ max_budget + ", phone=" + phone + ", oicq=" + oicq + ", type=" + type + ", price=" + price
-				+ ", audit=" + audit + ", click_count=" + click_count + ", cha_count=" + cha_count + ", date=" + date
-				+ ", designs=" + designs + ", begin=" + begin + ", handle_name=" + handle_name + ", handle_id="
-				+ handle_id + "]";
+	public Integer getMin_cha() {
+		return min_cha;
 	}
 
-	public Projects() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setMin_cha(Integer min_cha) {
+		this.min_cha = min_cha;
 	}
-
-	public Projects(Integer id, String uuid, String user_uuid, String title, String message, String area, Integer days,
-			Double min_budget, Double max_budget, String phone, String oicq, String type, Integer price, Integer audit,
-			Integer click_count, Integer cha_count, Date date, List<ProjectDesign> designs, Integer begin,
-			String handle_name, Integer handle_id) {
-		super();
-		this.id = id;
-		this.uuid = uuid;
-		this.user_uuid = user_uuid;
-		this.title = title;
-		this.message = message;
-		this.area = area;
-		this.days = days;
-		this.min_budget = min_budget;
-		this.max_budget = max_budget;
-		this.phone = phone;
-		this.oicq = oicq;
-		this.type = type;
-		this.price = price;
-		this.audit = audit;
-		this.click_count = click_count;
-		this.cha_count = cha_count;
-		this.date = date;
-		this.designs = designs;
-		this.begin = begin;
-		this.handle_name = handle_name;
-		this.handle_id = handle_id;
-	}
-
+	
 }

@@ -32,7 +32,7 @@ public interface UserDao {
 	public Integer userDelete(User user);
 	
 	// 用户信息条数
-	@RequestMapping("/yilianData/user/UserCount")
+	@RequestMapping("/yilianData/user/userCount")
 	public Integer userCount(User user);
 
 }

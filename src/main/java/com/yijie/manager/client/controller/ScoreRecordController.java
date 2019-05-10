@@ -132,5 +132,25 @@ public class ScoreRecordController {
 			return result;
 		}
 	}
+	/**
+	 * 
+	 * @param scoreRecord
+	 * @return
+	 */
+	@RequestMapping("/ScoreRecordCount")
+	public Map<String, Object> ScoreRecordCount(@RequestBody ScoreRecord scoreRecord){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try {
+			Integer count = scoreRecordService.ScoreRecordCount(scoreRecord);
+			result.put("count", count);
+			return result;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			result.put("code", 0);
+			result.put("msg", "系统出错");
+			return result;
+		}
+	}
 
 }

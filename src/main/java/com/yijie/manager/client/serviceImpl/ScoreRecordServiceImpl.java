@@ -40,4 +40,10 @@ public class ScoreRecordServiceImpl implements ScoreRecordService{
 		return scoreRecordDao.scoreRecordDelete(scoreRecord);
 	}
 
+	@Override
+	public Integer ScoreRecordCount(ScoreRecord scoreRecord) {
+		// TODO 自动生成的方法存根
+		return scoreRecordDao.ScoreRecordCount(scoreRecord);
+	}
+
 }

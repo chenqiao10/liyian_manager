@@ -60,4 +60,10 @@ public class ScoreDaoClientFallBack implements ScoreDao{
 		return 0;
 	}
 
+	@Override
+	public Integer ScoreRecordCount(ScoreRecord scoreRecord) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
+
 }

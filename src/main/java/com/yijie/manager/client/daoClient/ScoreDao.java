@@ -75,5 +75,7 @@ public interface ScoreDao {
 	// 积分记录删除
 	@RequestMapping("/yilianData/ScoreRecord/ScoreRecordDelete")
 	public Integer scoreRecordDelete(ScoreRecord scoreRecord);
+	@RequestMapping("/yilianData/ScoreRecord/ScoreRecordCount")
+	public Integer ScoreRecordCount(ScoreRecord scoreRecord);
 
 }

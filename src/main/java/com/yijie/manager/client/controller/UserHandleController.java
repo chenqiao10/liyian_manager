@@ -174,17 +174,16 @@ public class UserHandleController {
 		StringBuffer sb = new StringBuffer();
 		System.out.println(user);
 		try {
-			Integer code = userHandleService.userUpdate(user);
 			// 添加日志
 			sb.append("账户	");
 			sb.append(user.getNum());
-			if (user.getAudit() == 2) {
-				sb.append("	企业注册审核中");
-			} else if (user.getAudit() == 1) {
+			if (user.getAudit() == 1) {
 				sb.append("	企业注册审核通过");
 			} else if (user.getAudit() == 0) {
 				sb.append("	企业注册不通过");
+				user.setLicense("无");
 			}
+			Integer code = userHandleService.userUpdate(user);
 			if (code == 0) {
 				sb.append("失败");
 			} else {
@@ -215,17 +214,18 @@ public class UserHandleController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			StringBuffer sb = new StringBuffer();
-			Integer code = userHandleService.userUpdate(user);
 			sb.append("账户	");
 			sb.append(user.getNum());
 			// 添加日志
-			if (user.getAudit() == 2) {
-				sb.append("	升级为企业账户审核");
-			} else if (user.getAudit() == 1) {
+			if (user.getAudit() == 1) {
 				sb.append("	升级为企业账户审核通过");
 			} else if (user.getAudit() == 0) {
 				sb.append("	升级为企业账户不通过");
+				user.setLevel(0);
+				user.setAudit(1);
+
 			}
+			Integer code = userHandleService.userUpdate(user);
 			if (code == 0) {
 				sb.append("失败");
 			} else {

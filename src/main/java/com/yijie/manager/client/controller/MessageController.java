@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.yijie.manager.client.model.Message;
 import com.yijie.manager.client.model.SafeLog;
+import com.yijie.manager.client.model.User;
 import com.yijie.manager.client.service.MessageService;
 import com.yijie.manager.client.service.SafeLogService;
 

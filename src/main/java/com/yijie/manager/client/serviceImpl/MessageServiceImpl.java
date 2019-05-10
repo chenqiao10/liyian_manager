@@ -39,4 +39,10 @@ public class MessageServiceImpl implements MessageService{
 		return messageDao.messageInsert(message);
 	}
 
+	@Override
+	public Integer messageCount(Message message) {
+		// TODO 自动生成的方法存根
+		return messageDao.messageCount(message);
+	}
+
 }

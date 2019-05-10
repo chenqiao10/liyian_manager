@@ -31,5 +31,7 @@ public interface MessageDao {
 	// 推送消息添加
 	@RequestMapping("/yilianData/admin/messageInsert")
 	public Integer messageInsert(Message message);
+	@RequestMapping("/yilianData/admin/messageCount")
+	public Integer messageCount(Message message);
 
 }

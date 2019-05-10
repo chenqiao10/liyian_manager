@@ -22,5 +22,7 @@ public interface MessageService {
 	
 	//推送消息添加
 	public Integer messageInsert(Message message);
+//推送条数
+	public Integer messageCount(Message message);
 
 }

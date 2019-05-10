@@ -33,4 +33,10 @@ public class MessageDaoClientFallBack implements MessageDao{
 		return 0;
 	}
 
+	@Override
+	public Integer messageCount(Message message) {
+		// TODO 自动生成的方法存根
+		return 0;
+	}
+
 }

@@ -150,4 +150,19 @@ public class MessageController {
 		}
 		return map;
 	}
+	@RequestMapping("/messageCount")
+	public Map<String, Object> messageCount(@RequestBody Message message) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			Integer count = messageService.messageCount(message);
+			map.put("count", count);
+			map.put("code", 1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("code", 0);
+			map.put("msg", "系统出错");
+		}
+		return map;
+	}
 }

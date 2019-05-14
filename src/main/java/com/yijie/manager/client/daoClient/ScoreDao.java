@@ -61,21 +61,22 @@ public interface ScoreDao {
 	 */
 
 	// 积分记录查询
-	@RequestMapping("/yilianData/ScoreRecord/ScoreRecordSelect")
+	@RequestMapping("/yilianData/user/scoreRecordSelect")
 	public List<ScoreRecord> scoreRecordSelect(ScoreRecord scoreRecord);
 
 	// 积分记录添加
-	@RequestMapping("/yilianData/ScoreRecord/ScoreRecordInsert")
+	@RequestMapping("/yilianData/user/scoreRecordInsert")
 	public Integer scoreRecordInsert(ScoreRecord scoreRecord);
 
 	// 积分记录更新
-	@RequestMapping("/yilianData/ScoreRecord/ScoreRecordUpdate")
+	@RequestMapping("/yilianData/user/scoreRecordUpdate")
 	public Integer scoreRecordUpdate(ScoreRecord scoreRecord);
 
 	// 积分记录删除
-	@RequestMapping("/yilianData/ScoreRecord/ScoreRecordDelete")
+	@RequestMapping("/yilianData/user/scoreRecordDelete")
 	public Integer scoreRecordDelete(ScoreRecord scoreRecord);
-	@RequestMapping("/yilianData/ScoreRecord/ScoreRecordCount")
+
+	@RequestMapping("/yilianData/user/scoreRecordCount")
 	public Integer ScoreRecordCount(ScoreRecord scoreRecord);
 
 }

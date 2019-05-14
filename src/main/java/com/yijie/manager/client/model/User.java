@@ -6,47 +6,45 @@ package com.yijie.manager.client.model;
  *
  */
 public class User {
-	
-	//自增ID
+
+	// 自增ID
 	private Integer id;
-	
-	//系统生成uuid
+
+	// 系统生成uuid
 	private String uuid;
-	
-	//账户微信登录对应openID
+
+	// 账户微信登录对应openID
 	private String openid;
-	
-	//账户QQ登录对应UID
+
+	// 账户QQ登录对应UID
 	private String qquid;
-	
-	//账户电话号码（登录账号）
+
+	// 账户电话号码（登录账号）
 	private String num;
-	
-	//账户密码
+
+	// 账户密码
 	private String password;
-	
-	//账户名称（个人/公司）
+
+	// 账户名称（个人/公司）
 	private String name;
-	
-	//账户积分余额
+
+	// 账户积分余额
 	private Integer balance;
-	
-	//账户级别（0.个人,1.企业）
+
+	// 账户级别（0.个人,1.企业）
 	private Integer level;
-	
-	//企业级别账户对应营业执照
+
+	// 企业级别账户对应营业执照
 	private String license;
-	
-	//是否通过审核(1.通过，2.审核中那个0.未通过)
+
+	// 是否通过审核(1.通过，0.未通过,2审核中)
 	private Integer audit;
-	//注册渠道(直接注册0账户升级1)
-	private Integer registtype;
+
 	// 分页数据（初始条数）
 	private Integer begin;
+	// 邀请码
+	private String inviteUUid;
 	
-	//邀请码
-	private String  inviteUUid;
-
 	//操作人名字
 	private String handle_name;
 	
@@ -141,14 +139,6 @@ public class User {
 		this.audit = audit;
 	}
 
-	public Integer getRegisttype() {
-		return registtype;
-	}
-
-	public void setRegisttype(Integer registtype) {
-		this.registtype = registtype;
-	}
-
 	public Integer getBegin() {
 		return begin;
 	}
@@ -185,8 +175,8 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", uuid=" + uuid + ", openid=" + openid + ", qquid=" + qquid + ", num=" + num
 				+ ", password=" + password + ", name=" + name + ", balance=" + balance + ", level=" + level
-				+ ", license=" + license + ", audit=" + audit + ", registtype=" + registtype + ", begin=" + begin
-				+ ", inviteUUid=" + inviteUUid + ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
+				+ ", license=" + license + ", audit=" + audit + ", begin=" + begin + ", inviteUUid=" + inviteUUid
+				+ ", handle_name=" + handle_name + ", handle_id=" + handle_id + "]";
 	}
 
 	public User() {
@@ -195,8 +185,8 @@ public class User {
 	}
 
 	public User(Integer id, String uuid, String openid, String qquid, String num, String password, String name,
-			Integer balance, Integer level, String license, Integer audit, Integer registtype, Integer begin,
-			String inviteUUid, String handle_name, Integer handle_id) {
+			Integer balance, Integer level, String license, Integer audit, Integer begin, String inviteUUid,
+			String handle_name, Integer handle_id) {
 		super();
 		this.id = id;
 		this.uuid = uuid;
@@ -209,12 +199,12 @@ public class User {
 		this.level = level;
 		this.license = license;
 		this.audit = audit;
-		this.registtype = registtype;
 		this.begin = begin;
 		this.inviteUUid = inviteUUid;
 		this.handle_name = handle_name;
 		this.handle_id = handle_id;
 	}
+
 	
-	
+
 }

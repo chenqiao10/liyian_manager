@@ -150,11 +150,11 @@ public class UserHandleController {
 	 */
 	@RequestMapping("/userPhoneExist")
 	public Map<String, Object> userPhoneExist(@RequestBody String num) {
+		System.err.println(num);
 		Map<String, Object> result = new HashMap<String, Object>();
 		User user = userHandleService.userPhoneExist(num);
 		if (user == null) {
 			result.put("code", 1);
-
 		} else {
 			result.put("code", 0);
 			result.put("msg", "号码已经存在");

@@ -27,6 +27,9 @@ public class ScoreRule {
 	
 	//操作人id
 	private Integer handle_id;
+	
+	//选择最小预算
+	private double min_budget_choose;
 
 	public Integer getId() {
 		return id;
@@ -100,11 +103,19 @@ public class ScoreRule {
 		this.handle_id = handle_id;
 	}
 
+	public double getMin_budget_choose() {
+		return min_budget_choose;
+	}
+
+	public void setMin_budget_choose(double min_budget_choose) {
+		this.min_budget_choose = min_budget_choose;
+	}
+
 	@Override
 	public String toString() {
 		return "ScoreRule [id=" + id + ", uuid=" + uuid + ", max_budget=" + max_budget + ", min_budget=" + min_budget
 				+ ", score_budget=" + score_budget + ", status=" + status + ", begin=" + begin + ", handle_name="
-				+ handle_name + ", handle_id=" + handle_id + "]";
+				+ handle_name + ", handle_id=" + handle_id + ", min_budget_choose=" + min_budget_choose + "]";
 	}
 
 	public ScoreRule() {
@@ -113,7 +124,7 @@ public class ScoreRule {
 	}
 
 	public ScoreRule(Integer id, String uuid, double max_budget, double min_budget, Integer score_budget,
-			Integer status, Integer begin, String handle_name, Integer handle_id) {
+			Integer status, Integer begin, String handle_name, Integer handle_id, double min_budget_choose) {
 		super();
 		this.id = id;
 		this.uuid = uuid;
@@ -124,7 +135,6 @@ public class ScoreRule {
 		this.begin = begin;
 		this.handle_name = handle_name;
 		this.handle_id = handle_id;
+		this.min_budget_choose = min_budget_choose;
 	}
-
-	
 }

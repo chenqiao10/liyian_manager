@@ -103,10 +103,12 @@ public class SuperAdminController {
 		// Shiro认证登录
 		Subject subject = SecurityUtils.getSubject();
 		Md5Hash hash = new Md5Hash(superAdmin.getPassword(), superAdmin.getNum(), 2);
+		System.out.println(hash.toString());
 		AuthenticationToken token = new UsernamePasswordToken(superAdmin.getNum(), hash.toString());
 		try {
 			subject.login(token);
 			SuperAdmin sadmin = (SuperAdmin) subject.getPrincipal();
+			System.out.println(sadmin);
 			if (sadmin.getStatus() != 1) {
 				result.put("code", 0);
 				result.put("msg", "已禁用");

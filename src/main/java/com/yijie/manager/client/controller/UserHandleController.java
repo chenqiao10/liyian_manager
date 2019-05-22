@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yijie.manager.client.model.Admin;
 import com.yijie.manager.client.model.SafeLog;
 import com.yijie.manager.client.model.User;
 import com.yijie.manager.client.service.SafeLogService;
 import com.yijie.manager.client.service.UserHandleService;
 import com.yijie.manager.client.utils.Uuid;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  * @描述 用户功能块
@@ -296,13 +300,15 @@ public class UserHandleController {
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping("/userDeleteAll")
-	public Map<String, Object> userDeleteAll(@RequestBody List<User> userList) {
+	@RequestMapping("/userUpdateAll")
+	public Map<String, Object> userUpdateAll(@RequestBody JSONObject json) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		JSONArray jsonArray = json.getJSONArray("adminList");
+		List<User> userList = (List<User>) jsonArray.toCollection(jsonArray, User.class);
 		try {
 			for (int i = 0; i < userList.size(); i++) {
 				StringBuffer sb = new StringBuffer();
-				Integer code = userHandleService.userDelete(userList.get(i));
+				Integer code = userHandleService.userUpdate(userList.get(i));
 				sb.append("删除账户	");
 				sb.append(userList.get(i).getNum());
 				if (code == 0) {

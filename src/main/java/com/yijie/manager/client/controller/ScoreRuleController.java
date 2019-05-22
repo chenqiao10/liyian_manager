@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yijie.manager.client.model.Admin;
 import com.yijie.manager.client.model.SafeLog;
 import com.yijie.manager.client.model.ScoreRule;
 import com.yijie.manager.client.service.SafeLogService;
 import com.yijie.manager.client.service.ScoreRuleService;
 import com.yijie.manager.client.utils.Uuid;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @RestController
 @RequestMapping("/user")
@@ -131,5 +135,47 @@ public class ScoreRuleController {
 			result.put("msg", "系统出错");
 			return result;
 		}
+	}
+	
+	
+	/**
+	 * 管理员账户信息批量修改
+	 * 
+	 * @param adminList
+	 * @return
+	 */
+	@RequestMapping("/scoreRuleUpdateAll")
+	public Map<String, Object> scoreRuleUpdateAll(@RequestBody JSONObject json) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		JSONArray jsonArray = json.getJSONArray("scoreRuleList");
+		List<ScoreRule> scoreRuleList = (List<ScoreRule>) jsonArray.toCollection(jsonArray, ScoreRule.class);
+		try {
+			for (int i = 0; i < scoreRuleList.size(); i++) {
+				System.out.println(scoreRuleList.get(i));
+				StringBuffer sb = new StringBuffer();
+				Integer code = ScoreRuleService.scoreRuleUpdate(scoreRuleList.get(i));
+				sb.append(scoreRuleList.get(i).getHandle_name());
+				if (scoreRuleList.get(i).getStatus() == 0) {
+					sb.append("	禁用积分规则");
+				} else if (scoreRuleList.get(i).getStatus() == 1) {
+					sb.append("	启用禁用积分规则");
+				}
+				if (code == 0) {
+					sb.append("	失败");
+				} else if (code == 1) {
+					sb.append("	成功");
+				}
+				SafeLog safeLog = new SafeLog();
+				safeLog.setHandle_name(scoreRuleList.get(i).getHandle_name());
+				safeLog.setHandle_id(scoreRuleList.get(i).getHandle_id());
+				safeLog.setHandle(sb.toString());
+				safeLog.setHandle_date(new Date());
+				safeLogService.safeLogAdd(safeLog);
+				map.put("code", code);
+			}
+		} catch (Exception e) { // TODO Auto-generated catch block e.printStackTrace();
+			map.put("code", 0);
+		}
+		return map;
 	}
 }

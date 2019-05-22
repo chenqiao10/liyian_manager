@@ -24,6 +24,9 @@ import com.yijie.manager.client.service.AdminService;
 import com.yijie.manager.client.service.SafeLogService;
 import com.yijie.manager.client.utils.Uuid;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 /**
  * 管理员账户模块
  * 
@@ -52,6 +55,7 @@ public class AdminController {
 		Subject subject = SecurityUtils.getSubject();
 		Md5Hash hash = new Md5Hash(admin.getPassword(), admin.getNum(), 2);
 		AuthenticationToken token = new UsernamePasswordToken(admin.getNum(), hash.toString());
+		System.out.println(token);
 		try {
 			subject.login(token);
 			Admin a = (Admin) subject.getPrincipal();
@@ -110,7 +114,7 @@ public class AdminController {
 	public Map<String, Object> adminUpdate(@RequestBody Admin admin) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			if(admin.getPassword()!=null) {
+			if (admin.getPassword() != null) {
 				Md5Hash hash = new Md5Hash(admin.getPassword(), admin.getNum(), 2);
 				admin.setPassword(hash.toString());
 			}
@@ -181,19 +185,22 @@ public class AdminController {
 	}
 
 	/**
-	 * 管理员账户信息批量删除
+	 * 管理员账户信息批量修改
 	 * 
 	 * @param adminList
 	 * @return
 	 */
-	@RequestMapping("/adminDeleteAll")
-	public Map<String, Object> adminDeleteAll(@RequestBody List<Admin> adminList) {
+	@RequestMapping("/adminUpdateAll")
+	public Map<String, Object> adminUpdateAll(@RequestBody JSONObject json) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		JSONArray jsonArray = json.getJSONArray("adminList");
+		List<Admin> adminList = (List<Admin>) jsonArray.toCollection(jsonArray, Admin.class);
 		try {
 			for (int i = 0; i < adminList.size(); i++) {
+				System.out.println(adminList.get(i));
 				StringBuffer sb = new StringBuffer();
-				Integer code = adminService.adminDelete(adminList.get(i));
-				sb.append("删除管理员账户	");
+				Integer code = adminService.adminUpdate(adminList.get(i));
+				sb.append("禁用管理员账户	");
 				sb.append(adminList.get(i).getNum());
 				if (code == 0) {
 					sb.append("	失败");
@@ -208,9 +215,7 @@ public class AdminController {
 				safeLogService.safeLogAdd(safeLog);
 				map.put("code", code);
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) { // TODO Auto-generated catch block e.printStackTrace();
 			map.put("code", 0);
 		}
 		return map;

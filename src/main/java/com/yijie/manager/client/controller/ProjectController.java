@@ -1,5 +1,6 @@
 package com.yijie.manager.client.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -11,16 +12,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yijie.manager.client.model.Admin;
 import com.yijie.manager.client.model.ProjectDesign;
 import com.yijie.manager.client.model.Projects;
 import com.yijie.manager.client.model.SafeLog;
-import com.yijie.manager.client.model.ScoreRule;
+import com.yijie.manager.client.model.ScoreRecord;
 import com.yijie.manager.client.model.User;
 import com.yijie.manager.client.service.ProjectService;
 import com.yijie.manager.client.service.SafeLogService;
-import com.yijie.manager.client.service.ScoreRuleService;
+import com.yijie.manager.client.service.ScoreRecordService;
 import com.yijie.manager.client.service.UserHandleService;
 import com.yijie.manager.client.utils.Uuid;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 /**
  * @描述 项目执行模块
@@ -38,8 +43,9 @@ public class ProjectController {
 	@Autowired
 	private SafeLogService safeLogService;
 	@Autowired
-	private ScoreRuleService ScoreRuleService;
-
+	private UserHandleService userHandleService;
+	@Autowired
+	private ScoreRecordService scoreRecordService;
 	/**
 	 * @描述 创建项目
 	 * @param projects
@@ -99,18 +105,8 @@ public class ProjectController {
 		System.out.println(projects);
 		Map<String, Object> result = new HashMap<String, Object>();
 		if (projects.getId() != null || projects.getUuid() != null) {
-			Integer scor = null;
 			try {
-				if (projects.getAudit() == 2) {
-					// 审核中点击详情计算积分
-					ScoreRule rule = new ScoreRule();
-					rule.setMax_budget(projects.getMax_budget());
-					rule.setMin_budget(projects.getMin_budget());
-					List<ScoreRule> score = ScoreRuleService.scoreRuleSelect(rule);
-					scor = score.get(0).getScore_budget();
-				}
 				Projects project = projectService.projectMessage(projects);
-				project.setPrice(scor);
 				User user = new User();
 				user.setUuid(project.getUser_uuid());
 				String name = UserHandleService.userLogin(user).getName();
@@ -292,7 +288,11 @@ public class ProjectController {
 	 */
 	@RequestMapping("/projectAudit")
 	public Map<String, Object> projectAudit(@RequestBody Projects projects) {
+		System.out.println(projects+"#############");
 		Map<String, Object> result = new HashMap<String, Object>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		if(projects.getId()!=null) {
+		ScoreRecord scoreRecord = new ScoreRecord();
 		SafeLog log = new SafeLog();
 		StringBuffer sb = new StringBuffer();
 		sb.append("用户: ");
@@ -303,18 +303,39 @@ public class ProjectController {
 		log.setHandle_id(projects.getHandle_id());
 		try {
 			if (projects.getAudit() == 0) {
-				sb.append("项目审核通过");
+				sb.append("项目审核不通过");
 			} else if (projects.getAudit() == 1) {
-				sb.append("项目未审核通过");
+				sb.append("项目审核通过");
 			}
-			Integer code = projectService.projectUpdate(projects);
-			result.put("projectMessage", code);
-			result.put("code", 1);
+			Projects pro = new Projects();
+			pro.setId(projects.getId());
+			pro.setAudit(projects.getAudit());
+			pro.setPrice(projects.getPrice());
+			Integer code = projectService.projectUpdate(pro);
+			//项目审核通过之后给用户增加积分
+			if(code!=0&&projects.getAudit() == 1) {
+				User u = new User();
+				u.setUuid(projects.getUser_uuid());
+				User user = userHandleService.userLogin(u);
+				user.setBalance(user.getBalance()+projects.getPrice());
+				Integer usercode = userHandleService.userUpdate(user);
+				if(usercode != 0) {//添加审核项目通过的积分记录
+					String time = sdf.format(new Date());
+					scoreRecord.setDate(sdf.parse(time));
+					scoreRecord.setType(2);
+					scoreRecord.setUser_uuid(projects.getUser_uuid());
+					scoreRecord.setScore(projects.getPrice());
+					scoreRecordService.scoreRecordAdd(scoreRecord);
+				}
+			}
+			result.put("code", code);
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.put("code", 0);
 			result.put("msg", "系统出错");
+		}
+		return result;
 		}
 		return result;
 	}
@@ -326,23 +347,26 @@ public class ProjectController {
 	 * @return
 	 */
 	@RequestMapping("/projectDeleteAll")
-	public Map<String, Object> projectDeleteAll(@RequestBody List<Projects> projectsList) {
+	public Map<String, Object> projectDeleteAll(@RequestBody JSONObject json) {
 		Map<String, Object> result = new HashMap<String, Object>();
+		JSONArray jsonArray = json.getJSONArray("projectList");
+		List<Projects> projectList = (List<Projects>) jsonArray.toCollection(jsonArray, Projects.class);
 		try {
-			for (int i = 0; i < projectsList.size(); i++) {
+			for (int i = 0; i < projectList.size(); i++) {
+				System.out.println(projectList.get(i));
 				StringBuffer sb = new StringBuffer();
-				Integer code = projectService.projectDelete(projectsList.get(i));
-				sb.append(projectsList.get(i).getHandle_name());// 操作人账户
+				Integer code = projectService.projectDelete(projectList.get(i));
+				sb.append(projectList.get(i).getHandle_name());// 操作人账户
 				sb.append("	删除项目    ");
-				sb.append(projectsList.get(i).getTitle());
+				sb.append(projectList.get(i).getTitle());
 				if (code == 0) {
 					sb.append("	失败");
 				} else if (code == 1) {
 					sb.append("	成功");
 				}
 				SafeLog safeLog = new SafeLog();
-				safeLog.setHandle_name(projectsList.get(i).getHandle_name());
-				safeLog.setHandle_id(projectsList.get(i).getHandle_id());
+				safeLog.setHandle_name(projectList.get(i).getHandle_name());
+				safeLog.setHandle_id(projectList.get(i).getHandle_id());
 				safeLog.setHandle(sb.toString());
 				safeLog.setHandle_date(new Date());
 				safeLogService.safeLogAdd(safeLog);

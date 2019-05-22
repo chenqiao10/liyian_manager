@@ -80,6 +80,7 @@ public class AdcolumnController {
 	public Map<String, Object> adcolumnInsert(@RequestBody Adcolumn adcolumn) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		adcolumn.setUuid(Uuid.getUuid());
+		adcolumn.setStatus(1);//1启用
 		Integer code = adcolumnService.adcolumnInsert(adcolumn);
 		map.put("code", code);
 		return map;

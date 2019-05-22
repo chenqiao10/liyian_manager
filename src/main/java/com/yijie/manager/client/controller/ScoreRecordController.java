@@ -133,7 +133,7 @@ public class ScoreRecordController {
 		}
 	}
 	/**
-	 * 
+	 * @ 积分记录条数
 	 * @param scoreRecord
 	 * @return
 	 */

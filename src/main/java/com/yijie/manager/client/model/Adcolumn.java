@@ -1,24 +1,27 @@
 package com.yijie.manager.client.model;
 
 /**
- * 广告轮播模块
+ * 广告栏位
  * 
- * @author sunzhu
+ * @author chenqiao
  *
  */
 public class Adcolumn {
-	
-	//广告轮播id
+
+	// 广告自增id
 	private Integer id;
-	
-	//广告轮播uuid
+
+	// 广告轮播uuid
 	private String uuid;
-	
-	//图片地址
+
+	// 广告标题
+	private String title;
+
+	// 图片地址
 	private String imgurl;
 	
-	//广告标题
-	private String title;
+	//启用禁用
+	private Integer status;
 
 	public Integer getId() {
 		return id;
@@ -36,14 +39,6 @@ public class Adcolumn {
 		this.uuid = uuid;
 	}
 
-	public String getImgurl() {
-		return imgurl;
-	}
-
-	public void setImgurl(String imgurl) {
-		this.imgurl = imgurl;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -52,9 +47,26 @@ public class Adcolumn {
 		this.title = title;
 	}
 
+	public String getImgurl() {
+		return imgurl;
+	}
+
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "Adcolumn [id=" + id + ", uuid=" + uuid + ", imgurl=" + imgurl + ", title=" + title + "]";
+		return "Adcolumn [id=" + id + ", uuid=" + uuid + ", title=" + title + ", imgurl=" + imgurl + ", status="
+				+ status + "]";
 	}
 
 	public Adcolumn() {
@@ -62,14 +74,14 @@ public class Adcolumn {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Adcolumn(Integer id, String uuid, String imgurl, String title) {
+	public Adcolumn(Integer id, String uuid, String title, String imgurl, Integer status) {
 		super();
 		this.id = id;
 		this.uuid = uuid;
-		this.imgurl = imgurl;
 		this.title = title;
+		this.imgurl = imgurl;
+		this.status = status;
 	}
-	
-	
 
+	
 }

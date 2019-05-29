@@ -114,12 +114,17 @@ public class AdminController {
 	public Map<String, Object> adminUpdate(@RequestBody Admin admin) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			if (admin.getPassword() != null) {
-				Md5Hash hash = new Md5Hash(admin.getPassword(), admin.getNum(), 2);
-				admin.setPassword(hash.toString());
+			if (admin.getId() != null || admin.getUuid() != null) {
+				if (admin.getPassword() != null && admin.getNum() != null) {
+					Md5Hash hash = new Md5Hash(admin.getPassword(), admin.getNum(), 2);
+					admin.setPassword(hash.toString());
+				}
+				Integer code = adminService.adminUpdate(admin);
+				map.put("code", code);
+			}else {
+				map.put("code", 0);
+				map.put("msg", "系统错误");
 			}
-			Integer code = adminService.adminUpdate(admin);
-			map.put("code", code);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

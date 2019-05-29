@@ -19,9 +19,12 @@ public class Adcolumn {
 
 	// 图片地址
 	private String imgurl;
-	
-	//启用禁用
+
+	// 启用禁用
 	private Integer status;
+
+	// 图片跳转路径
+	private String weburl;
 
 	public Integer getId() {
 		return id;
@@ -63,10 +66,18 @@ public class Adcolumn {
 		this.status = status;
 	}
 
+	public String getWeburl() {
+		return weburl;
+	}
+
+	public void setWeburl(String weburl) {
+		this.weburl = weburl;
+	}
+
 	@Override
 	public String toString() {
 		return "Adcolumn [id=" + id + ", uuid=" + uuid + ", title=" + title + ", imgurl=" + imgurl + ", status="
-				+ status + "]";
+				+ status + ", weburl=" + weburl + "]";
 	}
 
 	public Adcolumn() {
@@ -74,14 +85,14 @@ public class Adcolumn {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Adcolumn(Integer id, String uuid, String title, String imgurl, Integer status) {
+	public Adcolumn(Integer id, String uuid, String title, String imgurl, Integer status, String weburl) {
 		super();
 		this.id = id;
 		this.uuid = uuid;
 		this.title = title;
 		this.imgurl = imgurl;
 		this.status = status;
+		this.weburl = weburl;
 	}
 
-	
 }

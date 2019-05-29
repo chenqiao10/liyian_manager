@@ -35,7 +35,7 @@ public class SuperAdminController {
 	@RequestMapping("/superAdminInsert")
 	public Map<String, Object> superAdminInsert(@RequestBody SuperAdmin superAdmin){
 		Map<String, Object> map = new HashMap<String, Object>();
-		Md5Hash hash = new Md5Hash(superAdmin.getPassword(), superAdmin.getNum(), 2);
+		Md5Hash hash = new Md5Hash(superAdmin.getPassword(), superAdmin.getNum(), 3);
 		superAdmin.setPassword(hash.toString());
 		superAdmin.setStatus(1);//1默认正常使用
 		superAdmin.setUuid(Uuid.getUuid());
@@ -102,8 +102,10 @@ public class SuperAdminController {
 //		String msg = null;
 		// Shiro认证登录
 		Subject subject = SecurityUtils.getSubject();
-		Md5Hash hash = new Md5Hash(superAdmin.getPassword(), superAdmin.getNum(), 2);
+		Md5Hash hash = new Md5Hash(superAdmin.getPassword(), superAdmin.getNum(), 3);
 		System.out.println(hash.toString());
+		System.out.println(superAdmin.getNum());
+		System.out.println(superAdmin.getNum());
 		AuthenticationToken token = new UsernamePasswordToken(superAdmin.getNum(), hash.toString());
 		try {
 			subject.login(token);

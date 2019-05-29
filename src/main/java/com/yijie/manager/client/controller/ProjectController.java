@@ -137,12 +137,12 @@ public class ProjectController {
 		StringBuffer sb = new StringBuffer();
 		try {
 			Integer code = projectService.projectUpdate(projects);
-			sb.append("管理员账户   ");
+			sb.append("用户   ");
 			sb.append(projects.getHandle_name());
 			if (code == 0) {
-				sb.append(" 修改失败");
+				sb.append(" 修改项目信息失败");
 			} else if (code == 1) {
-				sb.append(" 修改成功");
+				sb.append(" 修改项目信息成功");
 			}
 			SafeLog safeLog = new SafeLog();
 			safeLog.setHandle_name(projects.getHandle_name());
@@ -173,12 +173,14 @@ public class ProjectController {
 		StringBuffer sb = new StringBuffer();
 		try {
 			Integer code = projectService.projectDelete(projects);
-			sb.append("管理员账户   ");
+			sb.append("用户   ");
 			sb.append(projects.getHandle_name());
+			sb.append("	删除项目    ");
+			sb.append(projects.getTitle());
 			if (code == 0) {
-				sb.append(" 删除失败");
+				sb.append("	失败");
 			} else if (code == 1) {
-				sb.append(" 删除成功");
+				sb.append("	成功");
 			}
 			SafeLog safeLog = new SafeLog();
 			safeLog.setHandle_name(projects.getHandle_name());
@@ -356,6 +358,7 @@ public class ProjectController {
 				System.out.println(projectList.get(i));
 				StringBuffer sb = new StringBuffer();
 				Integer code = projectService.projectDelete(projectList.get(i));
+				sb.append("用户");
 				sb.append(projectList.get(i).getHandle_name());// 操作人账户
 				sb.append("	删除项目    ");
 				sb.append(projectList.get(i).getTitle());

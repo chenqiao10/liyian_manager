@@ -11,13 +11,18 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.yijie.manager.client.model.Admin;
+import com.yijie.manager.client.model.SuperAdmin;
 import com.yijie.manager.client.service.AdminService;
+import com.yijie.manager.client.service.SuperAdminService;
 
 public class MyRealm extends AuthorizingRealm{
 	
 	
 	@Autowired
 	private AdminService adminService;
+	
+	@Autowired
+	private SuperAdminService superAdminService;
 	
 
 	@Override
@@ -35,12 +40,17 @@ public class MyRealm extends AuthorizingRealm{
 		Admin a = adminService.adminLogin(admin);
 		if(a == null){
 			// 用户不存在
-			return null;
+			SuperAdmin sadmin = new SuperAdmin();
+			sadmin.setNum(token.getUsername());
+			SuperAdmin b = superAdminService.superAdminLogin(sadmin);
+			if(b == null) {
+				//超级管理员查询为空
+				return null;
+			}
+			return new SimpleAuthenticationInfo(b,b.getPassword(),"");
 		}
 		//返回密码
 		return new SimpleAuthenticationInfo(a,a.getPassword(),"");
 	}
-	
-	
 
 }

@@ -219,7 +219,6 @@ public class UserHandleController {
 		try {
 			StringBuffer sb = new StringBuffer();
 			sb.append("账户	");
-			sb.append(user.getNum());
 			// 添加日志
 			if (user.getAudit() == 1) {
 				sb.append("	升级为企业账户审核通过");
@@ -295,7 +294,7 @@ public class UserHandleController {
 	}
 
 	/**
-	 * @ 用户信息批量删除
+	 * @ 用户信息批量启用禁用
 	 * 
 	 * @param user
 	 * @return
@@ -309,7 +308,11 @@ public class UserHandleController {
 			for (int i = 0; i < userList.size(); i++) {
 				StringBuffer sb = new StringBuffer();
 				Integer code = userHandleService.userUpdate(userList.get(i));
-				sb.append("删除账户	");
+				if (userList.get(i).getAudit() == 3) {
+					sb.append("批量禁用账户	");
+				} else if (userList.get(i).getAudit() == 1) {
+					sb.append("	批量启用账户   ");
+				}
 				sb.append(userList.get(i).getNum());
 				if (code == 0) {
 					sb.append("	失败");
@@ -346,9 +349,9 @@ public class UserHandleController {
 			Integer code = userHandleService.userUpdate(user);
 			String msg = "";
 			if (code == 0) {
-				msg = "用户信息修改失败";
+				msg = "修改用户信息失败";
 			} else if (code == 1) {
-				msg = "用户信息修改成功";
+				msg = "修改用户信息成功";
 			}
 			SafeLog safeLog = new SafeLog();
 			safeLog.setHandle_name(user.getHandle_name());
